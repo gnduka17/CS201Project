@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search results</title>
+
+	<link rel="stylesheet" href="main.css">
+	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
+
+	<style>
+		.clearfloat {
+			clear: both;
+		}
+		#topBar {
+			width: 100%;
+		}
+		#searchFor {
+			display: block;
+			margin: 0px auto;
+			text-align: center;
+			font-size: 1.4em;
+		}
+		#filterSearch {
+			margin: 20px auto;
+		}
+		#topRow, #bottomRow {
+			text-align: center;
+		}
+		.searchResult {
+			border-top: 1px solid lightgray;
+			border-bottom: 1px solid lightgray;
+			width: 800px;
+			margin: 0px auto;
+		}
+		.productPicture {
+			margin: 10px;
+			width: 140px;
+			height: 200px;
+			background-color: black;
+			float: left;
+		}
+		.productTitle {
+			width: 500px;
+			float: left;
+			font-size: 1.4em;
+		}
+		.productSeller {
+			width: 500px;
+			float: left;
+		}
+		.productDescription {
+			width: 500px;
+			float: left;
+		}
+		.buyItem {
+			border: 1px solid black;
+			border-radius: 5px;
+			width: 100px;
+			float: right;
+			text-align: center;
+		}
+
+	</style>
+
+</head>
+
+<body>
+	
+	<div id="navbar">
+		<div id="menuToggle">
+			<input type="checkbox" id="button" />
+
+			<span></span>
+			<span></span>
+			<span></span>
+
+			<ul id="menu">
+				<a class="menuItem" href="#"><li>Shop Page</li></a>
+				<a class="menuItem" href="#"><li>My Profile</li></a>
+				<a class="menuItem" href="#"><li>Add Item</li></a>
+				<a id="signOutButton" href="#">LOG OUT</a>
+			</ul> <!-- #menu -->
+		</div> <!-- #menuToggle -->
+
+		
+
+		<form id="searchForm">
+			<input id="searchBar" type="text" name="search" placeholder="Search for products">
+			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
+		</form>
+	</div> <!-- #navbar -->
+
+	<div id="topBar">
+		<p id="searchFor">Search Results for "test search"</p> <br>
+
+		<div id="filterSearch">
+			<form id = "searchFilters">
+				<div id="topRow">
+					Filter by:
+					<label for="priceFilter">Price</label>
+					<select id="priceFilter">
+						<option value="highToLow">High to Low</option>
+						<option value="lowToHigh">Low to High</option>
+					</select>
+
+					<label for="nameFilter">Name</label>
+					<select id="nameFilter">
+						<option value="aToZ">A to Z</option>
+						<option value="zToA">Z to A</option>
+					</select>
+				</div> <!-- #topRow -->
+				<div id="bottomRow">
+					<label>Category:</label>
+					<label for = "booksCategory">Books</label>
+					<input id = "booksCategory" type="checkbox" name="books">
+					<label for = "furnitureCategory">Furniture</label>
+					<input id = "furnitureCategory" type="checkbox" name="furniture">
+					<label for = "ticketsCategory">Tickets</label>
+					<input id = "ticketsCategory" type="checkbox" name="tickets">
+					<label for = "clothingCategory">Clothing</label>
+					<input id = "clothingCategory" type="checkbox" name="clothing">
+					<label for = "housingCategory">Housing</label>
+					<input id = "housingCategory" type="checkbox" name="housing">
+					<label for = "miscCategory">Misc.</label>
+					<input id = "miscCategory" type="checkbox" name="misc">
+				</div> <!-- #bottomRow -->
+			</form>
+		</div> <!-- #filterSearch -->
+
+	</div> <!-- #topBar -->
+
+	<div id="main-container">
+
+		<div class="searchResult">
+			<a href="pictureURL"><div class="productPicture"></div></a>
+			<p class="productTitle">Product title</p>
+			<p class="productSeller">Seller username</p>
+			<p class="productDescription">Product description. </p>
+
+			<div class="buyItem">Buy Item</div>
+
+			<div class="clearfloat"></div>
+		</div> <!-- #searchResult -->
+		<div class="searchResult">
+			<a href="pictureURL"><div class="productPicture"></div></a>
+			<p class="productTitle">Product title</p>
+			<p class="productSeller">Seller username</p>
+			<p class="productDescription">Product description. </p>
+
+			<div class="buyItem">Buy Item</div>
+
+			<div class="clearfloat"></div>
+		</div> <!-- #searchResult -->
+
+	</div> <!-- #main-container -->
+</body>
+</html>

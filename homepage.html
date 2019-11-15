@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HomePage</title>
+
+	<link rel="stylesheet" href="main.css">
+	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
+
+	<style>
+		#searchLabel {
+			width: 800px;
+			margin: 0px auto;
+			padding-top: 60px;
+			font-size: 2em;
+		}
+		#form {
+			display: block;
+			width: 800px;
+			margin: 20px auto;
+		}
+		#searchInput {
+			width: 600px;
+			height: 40px;
+		}
+		#submit {
+			float: none;
+			width: 80px;
+			height: 45px;
+			font-size: 1.1em;
+		}
+	</style>
+
+</head>
+
+<body>
+	
+	<div id="navbar">
+		<div id="menuToggle">
+			<input type="checkbox" id="button" />
+
+			<span></span>
+			<span></span>
+			<span></span>
+
+			<ul id="menu">
+				<a class="menuItem" href="#"><li>Shop Page</li></a>
+				<a class="menuItem" href="#"><li>My Profile</li></a>
+				<a class="menuItem" href="#"><li>My Transactions</li></a>
+				<a class="menuItem" href="#"><li>Add Item</li></a>
+				<a id="signOutButton" href="#">LOG OUT</a>
+			</ul> <!-- #menu -->
+		</div> <!-- #menuToggle -->
+
+	</div> <!-- #navbar -->
+
+	<div id="main-container">
+		<div id="searchLabel">Search for Products</div>
+		<form id="form">
+			<input id="searchInput" type="text" name="search">
+			<button id="submit" type="submit" name="submit">Search</button>
+		</form>
+	</div>
+</body>
+</html>
