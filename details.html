@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Product</title>
+
+	<link rel="stylesheet" href="main.css">
+	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
+
+	<style>
+		#back-button {
+			position: absolute;
+			text-decoration: none;
+			color: black;
+			font-size: 1.1em;
+			margin-left: 50px;
+		}
+		#main-container {
+			width: 800px;
+			margin: 0px auto;
+		}
+		#thumbnail-container {
+			float: left;
+			width: 200px;
+			height: 340px;
+
+		}
+		#thumbnailPicture {
+			display: block;
+			width: 196px;
+			height: 276px;
+			border: 2px solid black;
+			background-color: gray;
+		}
+		#buyButton {
+			margin-top: 20px;
+			display: block;
+			text-align: center;
+			height: 40px;
+			width: 194px;
+			font-size: 1.2em;
+			text-decoration: none;
+			font-weight: bold;
+			line-height: 40px;
+			color: white;
+			background-color: black;
+			border: 3px solid black;
+			transition: all 0.2s;
+		}
+		#buyButton:hover {
+			color: black;
+			background-color: white;
+		}
+		#details-container {
+			width: 600px;
+			float: right;
+		}
+		#productName {
+			font-size: 2em;
+			margin-left: 40px;
+			margin-top: 20px;
+			font-weight: bold;
+		}
+		#productSeller, #productCategory, #productCondition, #productDescription {
+			margin: 10px 0px 10px 40px;
+			font-size: 1.2em;
+		}
+		.productDetails {
+			display: inline;
+		}
+	</style>
+
+</head>
+
+<body>
+	
+	<div id="navbar">
+		<div id="menuToggle">
+			<input type="checkbox" id="button" />
+
+			<span></span>
+			<span></span>
+			<span></span>
+
+			<ul id="menu">
+				<a class="menuItem" href="#"><li>Shop Page</li></a>
+				<a class="menuItem" href="#"><li>My Profile</li></a>
+				<a class="menuItem" href="#"><li>Add Item</li></a>
+				<a id="signOutButton" href="#">LOG OUT</a>
+			</ul> <!-- #menu -->
+		</div> <!-- #menuToggle -->
+
+		<form id="searchForm">
+			<input id="searchBar" type="text" name="search" placeholder="Search for products">
+			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
+		</form>
+	</div> <!-- #navbar -->
+
+	<a id="back-button" href="" onclick="history.back()"><span id="backArrow"class="oi" data-glyph="arrow-left"></span> GO BACK</a>
+
+	<div id="main-container">
+
+		<div id="thumbnail-container">
+			<img id="thumbnailPicture" src="" alt="thumbnail">
+			<a id="buyButton" href="">BUY</a>
+		</div> <!-- #thumbnail-container -->
+
+		<div id="details-container">
+			<div id="productName">Product Name</div>
+
+			<div id="productSeller">Seller: 
+				<p class="productDetails">John Doe</p>
+			</div>
+
+			<div id="productCategory">Category: 
+				<p class="productDetails">Furniture</p>
+			</div>
+
+			<div id="productCondition">Condition: 
+				<p class="productDetails">New</p>
+			</div>
+
+			<br>
+
+			<div id="productDescription">Description: 
+				<p class="productDetails">The lamp is from IKEA and is brand new. The lamp is from IKEA and is brand new. The lamp is from IKEA and is brand new. The lamp is from IKEA and is brand new.</p>
+			</div>
+				
+
+		</div> <!-- #details-container -->
+
+	</div> <!-- #main-container -->
+
+</body>
+</html>
