@@ -11,53 +11,94 @@
 			clear: both;
 		}
 		#topBar {
-			width: 100%;
+			width: 1200px;
+			margin: 0px auto;
 		}
 		#searchFor {
+			padding-top: 30px;
+			margin: 0px 10px 0px 0px;
 			display: block;
-			margin: 0px auto;
-			text-align: center;
-			font-size: 1.4em;
+			font-size: 1.6em;
+			font-weight: bold;
+			float: left;
+		}
+		#resultCount {
+			padding-top: 40px;
+			margin: 0px;
+			display: block;
+			float: left;
 		}
 		#filterSearch {
-			margin: 20px auto;
+			height: 50px;
+			width: 100px;
+			border: 1px solid black;
+			margin: 20px 0px;
+			overflow: hidden;
+			line-height: 50px;
+			font-size: 1.1em;
+			padding: 0px 20px;
+			transition: all 0.2s;
 		}
-		#topRow, #bottomRow {
-			text-align: center;
+		#filterSearch:hover {
+			width: 100%;
 		}
-		.searchResult {
-			border-top: 1px solid lightgray;
-			border-bottom: 1px solid lightgray;
-			width: 800px;
+		#searchFilters {
+			margin-left: 30px;
+			display: inline;
+		}
+		#filterIcon {
+			display: inline;
+			font-size: 0.8em;
+			line-height: 50px;
+			margin-right: 10px;
+		}
+		#searchFilters > label {
+			margin-left: 10px;
+		}
+
+		#main-container {
+			width: 1200px;
 			margin: 0px auto;
 		}
+		.searchResult {
+			width: 280px;
+			margin: 8px;
+			border: 1px solid white;
+			float: left;
+			color: black;
+
+		}
+		.searchResult:hover {
+			margin: 8px;
+			border: 1px solid black;
+			box-shadow: 0px 0px 40px 1px lightgray;
+		}
 		.productPicture {
-			margin: 10px;
-			width: 140px;
-			height: 200px;
-			background-color: black;
+			width: 280px;
+			height: 280px;
+			background-color: whitesmoke;
 			float: left;
 		}
 		.productTitle {
-			width: 500px;
+			width: 280px;
+			margin: 20px 10px 10px 10px;
 			float: left;
-			font-size: 1.4em;
+			font-size: 1.1em;
 		}
 		.productSeller {
-			width: 500px;
+			color: gray;
+			margin: 0px 10px;
+			width: 280px;
 			float: left;
 		}
-		.productDescription {
-			width: 500px;
+		.productPrice {
+			margin: 10px 10px 20px 10px;
+			width: 280px;
 			float: left;
+			color: gray;
 		}
-		.buyItem {
-			border: 1px solid black;
-			border-radius: 5px;
-			width: 100px;
-			float: right;
-			text-align: center;
-		}
+
+		
 
 	</style>
 
@@ -90,39 +131,38 @@
 	</div> <!-- #navbar -->
 
 	<div id="topBar">
-		<p id="searchFor">Search Results for "test search"</p> <br>
+		<div id="topTopBar">
+			<p id="searchFor">Results for "test search"</p><p id="resultCount">(6 ITEMS)</p>
+		</div>
+
+		<div class="clearfloat"></div>
 
 		<div id="filterSearch">
+			<span id="filterIcon" class="oi" data-glyph="ellipses"></span><strong>FILTERS</strong>
 			<form id = "searchFilters">
-				<div id="topRow">
-					Filter by:
-					<label for="priceFilter">Price</label>
-					<select id="priceFilter">
-						<option value="highToLow">High to Low</option>
-						<option value="lowToHigh">Low to High</option>
-					</select>
+				<label for="priceFilter">PRICE</label>
+				<select id="priceFilter">
+					<option value="highToLow">HIGH TO LOW</option>
+					<option value="lowToHigh">LOW TO HIGH</option>
+				</select>
 
-					<label for="nameFilter">Name</label>
-					<select id="nameFilter">
-						<option value="aToZ">A to Z</option>
-						<option value="zToA">Z to A</option>
-					</select>
-				</div> <!-- #topRow -->
-				<div id="bottomRow">
-					<label>Category:</label>
-					<label for = "booksCategory">Books</label>
-					<input id = "booksCategory" type="checkbox" name="books">
-					<label for = "furnitureCategory">Furniture</label>
-					<input id = "furnitureCategory" type="checkbox" name="furniture">
-					<label for = "ticketsCategory">Tickets</label>
-					<input id = "ticketsCategory" type="checkbox" name="tickets">
-					<label for = "clothingCategory">Clothing</label>
-					<input id = "clothingCategory" type="checkbox" name="clothing">
-					<label for = "housingCategory">Housing</label>
-					<input id = "housingCategory" type="checkbox" name="housing">
-					<label for = "miscCategory">Misc.</label>
-					<input id = "miscCategory" type="checkbox" name="misc">
-				</div> <!-- #bottomRow -->
+				<label for="nameFilter">NAME</label>
+				<select id="nameFilter">
+					<option value="aToZ">A TO Z</option>
+					<option value="zToA">Z TO A</option>
+				</select>
+				<label for = "booksCategory">BOOKS</label>
+				<input id = "booksCategory" type="checkbox" name="books">
+				<label for = "furnitureCategory">FURNITURE</label>
+				<input id = "furnitureCategory" type="checkbox" name="furniture">
+				<label for = "ticketsCategory">TICKETS</label>
+				<input id = "ticketsCategory" type="checkbox" name="tickets">
+				<label for = "clothingCategory">CLOTHING</label>
+				<input id = "clothingCategory" type="checkbox" name="clothing">
+				<label for = "housingCategory">HOUSING</label>
+				<input id = "housingCategory" type="checkbox" name="housing">
+				<label for = "miscCategory">MISC</label>
+				<input id = "miscCategory" type="checkbox" name="misc">
 			</form>
 		</div> <!-- #filterSearch -->
 
@@ -130,26 +170,66 @@
 
 	<div id="main-container">
 
+
+		<a href="productURL">
 		<div class="searchResult">
-			<a href="pictureURL"><div class="productPicture"></div></a>
+			<div class="productPicture"></div>
 			<p class="productTitle">Product title</p>
 			<p class="productSeller">Seller username</p>
-			<p class="productDescription">Product description. </p>
-
-			<div class="buyItem">Buy Item</div>
+			<p class="productPrice">Product price. </p>
 
 			<div class="clearfloat"></div>
-		</div> <!-- #searchResult -->
+		</div></a> <!-- #searchResult -->
+
+		<a href="productURL">
 		<div class="searchResult">
-			<a href="pictureURL"><div class="productPicture"></div></a>
+			<div class="productPicture"></div>
 			<p class="productTitle">Product title</p>
 			<p class="productSeller">Seller username</p>
-			<p class="productDescription">Product description. </p>
-
-			<div class="buyItem">Buy Item</div>
+			<p class="productPrice">Product price. </p>
 
 			<div class="clearfloat"></div>
-		</div> <!-- #searchResult -->
+		</div></a> <!-- #searchResult -->
+
+		<a href="productURL">
+		<div class="searchResult">
+			<div class="productPicture"></div>
+			<p class="productTitle">Product title</p>
+			<p class="productSeller">Seller username</p>
+			<p class="productPrice">Product price. </p>
+
+			<div class="clearfloat"></div>
+		</div></a> <!-- #searchResult -->
+
+		<a href="productURL">
+		<div class="searchResult">
+			<div class="productPicture"></div>
+			<p class="productTitle">Product title</p>
+			<p class="productSeller">Seller username</p>
+			<p class="productPrice">Product price. </p>
+
+			<div class="clearfloat"></div>
+		</div></a> <!-- #searchResult -->
+
+		<a href="productURL">
+		<div class="searchResult">
+			<div class="productPicture"></div>
+			<p class="productTitle">Product title</p>
+			<p class="productSeller">Seller username</p>
+			<p class="productPrice">Product price. </p>
+
+			<div class="clearfloat"></div>
+		</div></a> <!-- #searchResult -->
+
+		<a href="productURL">
+		<div class="searchResult">
+			<div class="productPicture"></div>
+			<p class="productTitle">Product title</p>
+			<p class="productSeller">Seller username</p>
+			<p class="productPrice">Product price. </p>
+
+			<div class="clearfloat"></div>
+		</div></a> <!-- #searchResult -->
 
 	</div> <!-- #main-container -->
 </body>

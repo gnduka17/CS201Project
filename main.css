@@ -5,7 +5,7 @@ body
 {
 
   margin: 0;
-  margin-top: 100px;
+  margin-top: 81px;
   padding: 0;
 
   font-family: "Helvetica", sans-serif;
@@ -19,7 +19,8 @@ body
 
   height: 80px;
   width: 100%;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid black;
+  background-color: white;
 }
 
 .menuItem {
@@ -28,7 +29,7 @@ body
 }
 
 .menuItem:hover {
-  color: #E57373;
+  color: lightgray;
 }
 
 #signOutButton {
@@ -43,6 +44,7 @@ body
   width: 120px;
   border: 3px solid white;
   font-size: 1.2em;
+  transition: all 0.2s;
 }
 
 #signOutButton:hover {
@@ -198,8 +200,8 @@ body
   float: left;
 }
 
-#searchBar:hover {
-  background-color: lightgray;
+#searchBar:hover, #searchBar:focus {
+  background-color: whitesmoke;
 }
 
 #submit {
