@@ -175,17 +175,63 @@ body
   color: white;
 }
 
-#searchForm{
-  position: fixed;
+#notificationIcon {
+  color: black;
+  height: 38px;
+  width: 38px;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 0.8em;
+  line-height: 40px;
+  margin: 20px 40px;
+  margin-right: 0px;
+  float: right;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+#notificationIcon:hover {
+  color: black;
+  background-color: whitesmoke;
+  animation: ring 1s;
+}
+
+@keyframes ring {
+  0% {
+      transform: rotate(35deg);
+  }
+  12.5% {
+      transform: rotate(-30deg);
+  }
+  25% {
+      transform: rotate(25deg);
+  }
+  37.5% {
+      transform: rotate(-20deg);
+  }
+  50% {
+      transform: rotate(15deg);
+  }
+  62.5% {
+      transform: rotate(-10deg);
+  }
+  75% {
+      transform: rotate(5deg);
+  }
+  100% {
+      transform: rotate(0deg);
+  }
+}
+
+#searchForm {
   right: 0px;
-  float: left;
+  float: right;
   height: 40px;
-  padding: 20px 30px;
-  z-index: 1;
+  padding: 20px 20px;
 }
 
 #searchBar {
-  border:1px solid gray;
+  border:1px solid black;
   border-right: 0px;
   padding: 0px 10px;
   outline: none;
@@ -198,10 +244,16 @@ body
   width: 200px;
   font-size: 1.1em;
   float: left;
+  transition: all 0.2s;
 }
 
-#searchBar:hover, #searchBar:focus {
+#searchBar:hover {
   background-color: whitesmoke;
+}
+
+#searchBar:focus {
+  background-color: whitesmoke;
+  width: 260px;
 }
 
 #submit {
@@ -210,8 +262,8 @@ body
   width: 40px;
   padding: 0px 10px;
   border-radius: 0px;
-  border: 1px solid gray;
+  border: 1px solid black;
   float: left;
-  background-color: dimgray;
+  background-color: black;
   color: white;
 }

@@ -125,14 +125,19 @@
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
-		
-
 		<form id="searchForm">
 			<input id="searchBar" type="text" name="search" placeholder="Search for products">
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
-	</div> <!-- #navbar -->
 
+		<a href="notifications.jsp">
+			<div id="notificationIcon">
+				<span class="oi" data-glyph="bell"></span>
+			</div>
+		</a>
+		
+	</div> <!-- #navbar -->
+	
 	<div id="topBar">
 		<div id="topTopBar">
 			<p id="searchFor">Results for "test search"</p><p id="resultCount">(6 ITEMS)</p>
