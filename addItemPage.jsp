@@ -59,12 +59,12 @@ align-items:center;
 justify-content:center;
 }
 </style>
-	<!-- <link rel="stylesheet" href="main.css">
-	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet"> -->
+	<link rel="stylesheet" href="main.css">
+	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
 </head>
 
 <body>
-<!-- <div id="navbar">
+<div id="navbar">
 		<div id="menuToggle">
 			<input type="checkbox" id="button" />
 
@@ -81,15 +81,15 @@ justify-content:center;
 			</ul> #menu
 		</div> #menuToggle
 
-	</div> #navbar -->
+	</div> #navbar
 	
-<!-- 	<div id="main-container">
+<div id="main-container">
 		<div id="searchLabel">Search for Products</div>
 		<form id="form">
 			<input id="searchInput" type="text" name="search">
 			<button id="submit" type="submit" name="submit">Search</button>
 		</form>
-	</div> -->
+	</div> 
 	<h1>Add Item</h1>
 <div id = "content">
 
