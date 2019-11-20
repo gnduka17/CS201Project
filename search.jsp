@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.HashMap" import="java.util.Iterator" import="java.util.Map;"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="java.util.Iterator" import="java.util.Map" import="backend.Product"%>
     
 <% 
-	HashMap<Integer, Product> results = (HashMap<Integer, Product>)request.getAttribute("results");
+	ArrayList<Product> results = (ArrayList<Product>)request.getAttribute("resultList");
 %>
     
 <!DOCTYPE html>
@@ -97,6 +97,7 @@
 			margin: 0px 10px;
 			width: 280px;
 			float: left;
+			font-style: italic;
 		}
 		.productPrice {
 			margin: 10px 10px 20px 10px;
@@ -105,6 +106,19 @@
 			color: gray;
 		}
 	</style>
+	
+	<script>
+	function sortName(name) {
+		document.location.href="/SearchServlet?sortName=" + name + "&searchInput="+ <%=request.getParameter("searchInput") %>;
+	}
+	function sortPrice(price) {
+		this.form.submit();
+	}
+	function sortCategory(category) {
+		document.location.href="/SearchServlet?sortCategory=" + category + "&searchInput="+ <%=request.getParameter("searchInput") %>;
+	}
+	</script>
+	
 </head>
 
 <body>
@@ -125,11 +139,13 @@
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
+		
+
 		<form id="searchForm">
-			<input id="searchBar" type="text" name="search" placeholder="Search for products">
+			<input id="searchBar" type="text" name="searchInput" placeholder="Search for products">
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
-
+		
 		<a href="notifications.jsp">
 			<div id="notificationIcon">
 				<span class="oi" data-glyph="bell"></span>
@@ -137,72 +153,74 @@
 		</a>
 		
 	</div> <!-- #navbar -->
-	
+
 	<div id="topBar">
 		<div id="topTopBar">
-			<p id="searchFor">Results for "test search"</p><p id="resultCount">(6 ITEMS)</p>
+			<p id="searchFor">Results for "<%=request.getAttribute("searchInput") %>"</p>
+			<% 	String items = "ITEMS";
+				if(results.size() == 1) {
+					items = "ITEM";
+				}%>
+			<p id="resultCount">(<%=results.size()%> <%=items%>)</p>
 		</div>
 
 		<div class="clearfloat"></div>
 
 		<div id="filterSearch">
 			<span id="filterIcon" class="oi" data-glyph="ellipses"></span><strong>FILTERS</strong>
-			<form id = "searchFilters">
+			<form id = "searchFilters" action="SearchServlet">
+				<input type="hidden" name="searchInput" value="<%= request.getAttribute("searchInput") %>"> 
 				<label for="priceFilter">PRICE</label>
-				<select id="priceFilter">
-					<option value="highToLow">HIGH TO LOW</option>
-					<option value="lowToHigh">LOW TO HIGH</option>
+				<select id="priceFilter" name="sortPrice" onchange="this.form.submit()">
+					<option value="highToLow" <%= request.getAttribute("hightolowSelected") %>>HIGH TO LOW</option>
+					<option value="lowToHigh" <%= request.getAttribute("lowtohighSelected") %>>LOW TO HIGH</option>
 				</select>
 
 				<label for="nameFilter">NAME</label>
-				<select id="nameFilter">
-					<option value="aToZ">A TO Z</option>
-					<option value="zToA">Z TO A</option>
+				<select id="nameFilter" name="sortName" onchange="this.form.submit()">
+					<option value="aToZ" <%= request.getAttribute("atozSelected") %>>A TO Z</option>
+					<option value="zToA" <%= request.getAttribute("ztoaSelected") %>>Z TO A</option>
 				</select>
 				<label for = "booksCategory">BOOKS</label>
-				<input id = "booksCategory" type="checkbox" name="books">
+				<input id = "booksCategory" type="radio" name="sortCategory" value="books" onclick="this.form.submit()" <%= request.getAttribute("booksChecked") %>>
 				<label for = "furnitureCategory">FURNITURE</label>
-				<input id = "furnitureCategory" type="checkbox" name="furniture">
+				<input id = "furnitureCategory" type="radio" name="sortCategory" value="furniture" onclick="this.form.submit()" <%=request.getAttribute("furnitureChecked") %>>
 				<label for = "ticketsCategory">TICKETS</label>
-				<input id = "ticketsCategory" type="checkbox" name="tickets">
+				<input id = "ticketsCategory" type="radio" name="sortCategory" value="tickets" onclick="this.form.submit()" <%=request.getAttribute("ticketsChecked") %>>
 				<label for = "clothingCategory">CLOTHING</label>
-				<input id = "clothingCategory" type="checkbox" name="clothing">
+				<input id = "clothingCategory" type="radio" name="sortCategory" value="clothing" onclick="this.form.submit()" <%=request.getAttribute("clothingChecked") %>>
 				<label for = "housingCategory">HOUSING</label>
-				<input id = "housingCategory" type="checkbox" name="housing">
+				<input id = "housingCategory" type="radio" name="sortCategory" value="housing" onclick="this.form.submit()" <%=request.getAttribute("housingChecked") %>>
 				<label for = "miscCategory">MISC</label>
-				<input id = "miscCategory" type="checkbox" name="misc">
+				<input id = "miscCategory" type="radio" name="sortCategory" value="misc" onclick="this.form.submit()" <%=request.getAttribute("miscChecked") %>>
 			</form>
 		</div> <!-- #filterSearch -->
 
 	</div> <!-- #topBar -->
 
 	<div id="main-container">
-		<%
-		Iterator resultsIterator = results.entrySet().iterator();  
-		while(resultsIterator.hasNext()) {
-			Map.Entry mapElement = (Map.Entry)resultsIterator.next(); 
-			Product entry = (Product)mapElement.getValue();
-			
-			int productID = entry.getProductID();
-			String productName = entry.getProductName();
-			double productPrice = entry.getProductPrice();
-			String productCondition = entry.getProductCondition();
-			String productDescription = entry.getProductDescription();
-			String productCategory = entry.getProductCategory();
-			int userID = entry.getUserID();
-			String sellerName = entry.getSellerName();
+		<%	
+			for(int i = 0; i < results.size(); i++) {
+				Product p = results.get(i);
+				int productID = p.getProductID();
+				String productName = p.getProductName();
+				String sellerUsername = p.getSellerUsername();
+				double productPrice = p.getProductPrice();
+				
 		%>
 			<a href="DetailsServlet?productID=<%=productID%>">
 			<div class="searchResult">
 				<div class="productPicture"></div>
 				<p class="productTitle"><%=productName%></p>
-				<p class="productSeller"><%=sellerName%></p>
-				<p class="productPrice"><%=productPrice%></p>
+				<p class="productSeller">@<%=sellerUsername%></p>
+				<p class="productPrice">$<%=productPrice%></p>
 
 				<div class="clearfloat"></div>
 			</div></a> <!-- #searchResult -->
 		<% } %>
 
 	</div> <!-- #main-container -->
+	
+	
 </body>
 </html>

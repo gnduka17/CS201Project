@@ -75,13 +75,25 @@ justify-content:center;
 			<ul id="menu">
 				<a class="menuItem" href="#"><li>Shop Page</li></a>
 				<a class="menuItem" href="#"><li>My Profile</li></a>
-				<a class="menuItem" href="#"><li>My Transactions</li></a>
 				<a class="menuItem" href="#"><li>Add Item</li></a>
 				<a id="signOutButton" href="#">LOG OUT</a>
-			</ul> #menu
-		</div> #menuToggle
+			</ul> <!-- #menu -->
+		</div> <!-- #menuToggle -->
 
-	</div> #navbar
+		
+
+		<form id="searchForm">
+			<input id="searchBar" type="text" name="searchInput" placeholder="Search for products">
+			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
+		</form>
+		
+		<a href="notifications.jsp">
+			<div id="notificationIcon">
+				<span class="oi" data-glyph="bell"></span>
+			</div>
+		</a>
+		
+	</div> <!-- #navbar -->
 	
 <div id="main-container">
 		<div id="searchLabel">Search for Products</div>
