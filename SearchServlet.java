@@ -96,11 +96,11 @@ public class SearchServlet extends HttpServlet {
 					String productCondition = rs.getString("productCondition");
 					String productDescription = rs.getString("productDescription");
 					String productCategory = rs.getString("productCategory");
-					int userID = rs.getInt("userID");
-					String sellerUsername = rs.getString("username");
+					int sellerID = rs.getInt("sellerID");
+					String sellerName = rs.getString("sellerName");
 						
 					// Create new Project object
-					Product newProduct = new Product(productID, productName, productPrice, productCondition, productDescription, productCategory, userID, sellerUsername);
+					Product newProduct = new Product(productID, productName, productPrice, productCondition, productDescription, productCategory, sellerID, sellerName);
 					
 					// Insert search result into the results HashMap
 					resultsMap.put(productID, newProduct);

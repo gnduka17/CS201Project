@@ -8,18 +8,18 @@ public class Product {
 	private String productCondition;
 	private String productDescription;
 	private String productCategory;
-	private int userID;
+	private int sellerID;
 	private String sellerName;
 	
 	public Product(int productID, String productName, double productPrice, String productCondition,
-			String productDescription, String productCategory, int userID, String sellerUsername) {
+			String productDescription, String productCategory, int sellerID, String sellerName) {
 		this.productID = productID;
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productCondition = productCondition;
 		this.productDescription = productDescription;
 		this.productCategory = productCategory;
-		this.userID = userID;
+		this.sellerID = sellerID;
 		this.sellerName = sellerName;
 	}
 
@@ -71,12 +71,12 @@ public class Product {
 		this.productCategory = productCategory;
 	}
 
-	public int getUserID() {
-		return userID;
+	public int getSellerID() {
+		return sellerID;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setSellerID(int sellerID) {
+		this.sellerID = sellerID;
 	}
 	
 	public String getSellerName() {
