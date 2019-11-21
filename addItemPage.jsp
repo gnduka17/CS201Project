@@ -75,14 +75,14 @@ justify-content:center;
 			<ul id="menu">
 				<a class="menuItem" href="#"><li>Shop Page</li></a>
 				<a class="menuItem" href="#"><li>My Profile</li></a>
-				<a class="menuItem" href="#"><li>Add Item</li></a>
+				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
 				<a id="signOutButton" href="#">LOG OUT</a>
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
 		
 
-		<form id="searchForm">
+		<form id="searchForm" action = "SearchServlet">
 			<input id="searchBar" type="text" name="searchInput" placeholder="Search for products">
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
@@ -103,18 +103,18 @@ Name<br/>
 <input type="text" name = "productName" id="productName"/>
 <br/><br/><br/><br/>
 Price<br/>
-$ <input id="price" type="number" min="0.00" step="0.01" max="2500" value="0.00" />
+$ <input id="price" type="number" name= "prodprice" min="0.00" step="0.01" max="2500" value="0.00" />
 <br/><br/><br/><br/>
 Condition<br/>
-<select id="conditionDropDown">
+<select name="condition" id="conditionDropDown">
 <option value="selectOne">Select a Condition</option>
-<option value="newCond">New</option>
-<option value="goodCond">Good</option>
-<option value="usedCond">Used</option>
+<option value="new">New</option>
+<option value="good">Good</option>
+<option value="used">Used</option>
 </select>
 <br/><br/><br/><br/>
 Category<br/>
-<select id="categoryDropDown">
+<select name="category" id="categoryDropDown">
 <option value="selectOne">Select a Category</option>
 <option value="books">Textbooks</option>
 <option value="furniture">Furniture</option>
