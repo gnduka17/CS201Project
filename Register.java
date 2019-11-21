@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
@@ -22,9 +24,7 @@ public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
     //CHANGE WHEN REAL DATABASE IS MADE 
-	public static final String credentials = "jdbc:mysql://google/lab_db?cloudSqlInstance=cs201-lab7-255501:us-central1:csci-201&socke" + 
-			"tFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=default" + 
-			"&password=default";
+	public static final String credentials = "jdbc:mysql://google/silcData?cloudSqlInstance=cs201silcproject:us-west1:cs201group&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=cs201SilCgroup&password=password";
 	static Connection connection1 = null;
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,24 +45,61 @@ public class Register extends HttpServlet {
     	String password = (String) request.getAttribute("password"); 
     	String confPassword = (String) request.getAttribute("confirmPassword"); 
     	
-    	if(!Pattern.matches("[!-~]+@(usc)+[.](edu)", email)) {
+    	try {
+    		PrintWriter out = response.getWriter();
     		
-    		
+	    	PreparedStatement preparedStatement = connection1.prepareStatement("SELECT * FROM User WHERE email='" + email + "'"); 
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			session.setAttribute("loggedIn", "false");
+			//Check if email is taken
+			if(rs.next()) {
+				
+				out.println("Email is already in use"); 
+				return; 
+			}
+			
+			//Checking if email is valid 
+	    	if(!Pattern.matches("[!-~]+@(usc)+[.](edu)", email)) {
+	    		out.println("This is not a valid usc email. ");
+	    		return; 
+	    		
+	    	}
+	    	//Check if username is in the table 
+	    	preparedStatement = connection1.prepareStatement("SELECT * FROM user WHERE username='" + username + "'"); 
+	    	rs = preparedStatement.executeQuery(); 
+	    	
+	    	if(rs.next()) {
+	    		out.println("This username is already taken");
+	    		return; 
+	    		
+	    	}
+	    	
+	    	if(password.equals(confPassword)) {
+	    		
+	    		session.setAttribute("username", username);
+	    		session.setAttribute("loggedIn", "true");
+	    		//Insert user into database 
+	    		preparedStatement = connection1.prepareStatement("INSERT INTO user(name,username,email,password,rating,ratingCount) VALUES(?,?,?,?,?,?)");
+	    		preparedStatement.setString(1, fullName);
+				preparedStatement.setString(2, username);
+				preparedStatement.setString(3, email);
+				preparedStatement.setString(4, password); 
+				preparedStatement.setDouble(5,0); 
+				preparedStatement.setInt(6,0); 
+				
+				//name,username,email,password,rating,ratingCount
+				preparedStatement.execute();
+	    		
+	    		
+	    	}else {
+	    		
+	    		out.println("Passwords do not match"); 
+	    		return;
+	    	}
+    	}catch(SQLException e) {
+    		e.printStackTrace();
     	}
-    	//Check if username is in the table 
-    	PrintWriter out = response.getWriter();
-    	if(password.equals(confPassword)) {
-    		
-    		session.setAttribute("username", username);
-    		session.setAttribute("loggedIn", "true");
-    		//Insert user into database 
-    		
-    	}else {
-    		
-    		out.println("Passwords do not match"); 
-    		
-    	}
-    	
     	
     }
 
