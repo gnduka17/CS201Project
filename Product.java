@@ -1,3 +1,4 @@
+package backend;
 
 public class Product {
 	
@@ -11,7 +12,7 @@ public class Product {
 	private String sellerName;
 	
 	public Product(int productID, String productName, double productPrice, String productCondition,
-			String productDescription, String productCategory, int userID, String sellerName) {
+			String productDescription, String productCategory, int userID, String sellerUsername) {
 		this.productID = productID;
 		this.productName = productName;
 		this.productPrice = productPrice;
@@ -82,7 +83,7 @@ public class Product {
 		return sellerName;
 	}
 
-	public void sellerName(String sellerName) {
+	public void setSellerName(String sellerName) {
 		this.sellerName = sellerName;
 	}
 }

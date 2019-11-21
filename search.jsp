@@ -204,7 +204,7 @@
 				Product p = results.get(i);
 				int productID = p.getProductID();
 				String productName = p.getProductName();
-				String sellerUsername = p.getSellerUsername();
+				String sellerName = p.getSellerName();
 				double productPrice = p.getProductPrice();
 				
 		%>
@@ -212,7 +212,7 @@
 			<div class="searchResult">
 				<div class="productPicture"></div>
 				<p class="productTitle"><%=productName%></p>
-				<p class="productSeller">@<%=sellerUsername%></p>
+				<p class="productSeller">@<%=sellerName%></p>
 				<p class="productPrice">$<%=productPrice%></p>
 
 				<div class="clearfloat"></div>
