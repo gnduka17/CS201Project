@@ -94,14 +94,6 @@ justify-content:center;
 		</a>
 		
 	</div> <!-- #navbar -->
-	
-<div id="main-container">
-		<div id="searchLabel">Search for Products</div>
-		<form id="form">
-			<input id="searchInput" type="text" name="search">
-			<button id="submit" type="submit" name="submit">Search</button>
-		</form>
-	</div> 
 	<h1>Add Item</h1>
 <div id = "content">
 
