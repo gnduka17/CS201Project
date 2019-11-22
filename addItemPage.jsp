@@ -73,8 +73,8 @@ justify-content:center;
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="#"><li>Shop Page</li></a>
-				<a class="menuItem" href="#"><li>My Profile</li></a>
+				<a class="menuItem" href="homepage.html"><li>Home</li></a>
+				<a class="menuItem" href="profile.html"><li>My Profile</li></a>
 				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
 				<a id="signOutButton" href="#">LOG OUT</a>
 			</ul> <!-- #menu -->
