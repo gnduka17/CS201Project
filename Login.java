@@ -1,4 +1,4 @@
-
+package final_project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
     	
     	try {
     		PreparedStatement ps = 
-    			connection1.prepareStatement("SELECT * FROM user WHERE username='" 
+    			connection1.prepareStatement("SELECT * FROM User WHERE username='" 
     					+ username + "' AND password='" + password + "'");
     		ResultSet rs = ps.executeQuery(); 
     		

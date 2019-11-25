@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
     
 <%
-	int userID = (int) session.getAttribute("userID");
+	HttpSession sesh = request.getSession(false);
+	String logged = (String)sesh.getAttribute("loggedIn");
+	//int userID = (int)sesh.getAttribute("userID");
+	int userID = 1;
 %>
 <!DOCTYPE html>
 <html>
@@ -148,7 +151,7 @@
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="homepage.html"><li>Home</li></a>
+				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
 				<a class="menuItem" href="GetUser?userID=<%=userID%>"><li>My Profile</li></a>
 				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
 				<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>

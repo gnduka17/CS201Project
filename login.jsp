@@ -86,7 +86,7 @@
 	function validate(){
 		
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("GET", "Register?username=" + document.regis.username.value + "&password=" + document.regis.password.value , false);
+		xhttp.open("GET", "Login?username=" + document.regis.username.value + "&password=" + document.regis.password.value , false);
 		xhttp.send();
 		if (xhttp.responseText.trim().length > 0) {
 			
@@ -111,7 +111,7 @@
 			<label for="username">Username</label> <br>
 			<input id="username" type="text" name="username" required> <br>
 			<label for="password">Password</label> <br>
-			<input id="password" type="password" name="passowrd" required>
+			<input id="password" type="password" name="password" required>
 			<button type="submit" name="login" value="login">LOGIN</button>
 		</form>
 		<br>
