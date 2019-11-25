@@ -38,12 +38,14 @@ public class Register extends HttpServlet {
     	initConnection(); 
     	HttpSession session = request.getSession();
     	
-    	String fullName = (String) request.getAttribute("fullName"); 
+    	String fullName = request.getParameter("fullName"); 
+    	//System.out.println(fullName + " " + username + " " + email + " " + password + confPassword);
     	
-    	String username = (String) request.getAttribute("username");
-    	String email = (String) request.getAttribute("email"); 
-    	String password = (String) request.getAttribute("password"); 
-    	String confPassword = (String) request.getAttribute("confirmPassword"); 
+    	String username = request.getParameter("username");
+    	String email = request.getParameter("email"); 
+    	String password = request.getParameter("password"); 
+    	String confPassword = request.getParameter("confirmPassword");
+    	//System.out.println(fullName + " " + username + " " + email + " " + password + confPassword);
     	
     	try {
     		PrintWriter out = response.getWriter();
@@ -59,14 +61,9 @@ public class Register extends HttpServlet {
 				return; 
 			}
 			
-			//Checking if email is valid 
-	    	if(!Pattern.matches("[!-~]+@(usc)+[.](edu)", email)) {
-	    		out.println("This is not a valid usc email. ");
-	    		return; 
-	    		
-	    	}
+	
 	    	//Check if username is in the table 
-	    	preparedStatement = connection1.prepareStatement("SELECT * FROM user WHERE username='" + username + "'"); 
+	    	preparedStatement = connection1.prepareStatement("SELECT * FROM User WHERE username='" + username + "'"); 
 	    	rs = preparedStatement.executeQuery(); 
 	    	
 	    	if(rs.next()) {
@@ -81,7 +78,7 @@ public class Register extends HttpServlet {
 	    		session.setAttribute("loggedIn", "true");
 	    		
 	    		//Insert user into database 
-	    		preparedStatement = connection1.prepareStatement("INSERT INTO user(name,username,email,password,rating,ratingCount) VALUES(?,?,?,?,?,?)");
+	    		preparedStatement = connection1.prepareStatement("INSERT INTO User(name,username,email,password,rating,ratingCount) VALUES(?,?,?,?,?,?)");
 	    		preparedStatement.setString(1, fullName);
 				preparedStatement.setString(2, username);
 				preparedStatement.setString(3, email);
@@ -92,7 +89,7 @@ public class Register extends HttpServlet {
 				//name,username,email,password,rating,ratingCount
 				preparedStatement.execute();
 	    		
-				preparedStatement = connection1.prepareStatement("SELECT * FROM user WHERE username='" + username + "'"); 
+				preparedStatement = connection1.prepareStatement("SELECT * FROM User WHERE username='" + username + "'"); 
 		    	rs = preparedStatement.executeQuery();
 		    	
 		    	int id = rs.getInt("userID"); 
@@ -134,7 +131,9 @@ public class Register extends HttpServlet {
 		}
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection1 = DriverManager.getConnection(credentials);
+			
+			
+			connection1 = DriverManager.getConnection("jdbc:mysql://google/silcData?cloudSqlInstance=cs201silcproject:us-west1:cs201group&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=cs201SilCgroup&password=password");
 		} catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();

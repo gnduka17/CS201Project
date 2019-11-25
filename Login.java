@@ -1,5 +1,6 @@
 package final_project;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -35,19 +36,18 @@ public class Login extends HttpServlet {
     
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	initConnection(); 
-    	
-    	String username = (String) request.getAttribute("username"); 
-    	String password = (String) request.getAttribute("password"); 
+    	//System.out.println("hello");
+    	String username = (String) request.getParameter("username"); 
+    	String password = (String) request.getParameter("password"); 
     	HttpSession session = request.getSession();
     	
     	try {
     		PreparedStatement ps = 
-    			connection1.prepareStatement("SELECT * FROM User WHERE username='" 
-    					+ username + "' AND password='" + password + "'");
+    			connection1.prepareStatement("SELECT * FROM User WHERE username='" + username + "' AND password='" + password + "'");
     		ResultSet rs = ps.executeQuery(); 
     		
     		if(rs.next()) {
-    			if(rs.getString("user").equals("guest")) {
+    			if(rs.getString("username").equals("guest")) {
     				
     				session.setAttribute("loggedIn", "guest");
     			}else {
@@ -73,21 +73,7 @@ public class Login extends HttpServlet {
     		e.printStackTrace();
     	}
     }
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
 	public static void initConnection() {
 		if (connection1 != null) {

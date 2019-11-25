@@ -107,15 +107,15 @@
 		<h2>Login</h2> <br>
 		
 		<h3 id="youGoofed"></h3>
-		<form name="regis" action="homepage.jsp" onsubmit="return validate();">
+		<form name="regis" method="GET" action="homepage.jsp" onsubmit="return validate();">
 			<label for="username">Username</label> <br>
 			<input id="username" type="text" name="username" required> <br>
 			<label for="password">Password</label> <br>
-			<input id="password" type="password" name="password" required>
+			<input id="password" type="password" name="passowrd" required>
 			<button type="submit" name="login" value="login">LOGIN</button>
 		</form>
 		<br>
-		<p>Don't have an account yet? <a href="register.html">REGISTER</a></p>
+		<p>Don't have an account yet? <a href="register.jsp">REGISTER</a></p>
 
 	</div> <!-- #login-container -->
 </body>

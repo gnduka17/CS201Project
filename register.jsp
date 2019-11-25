@@ -83,6 +83,7 @@
 		function validate(){
 			
 			var xhttp = new XMLHttpRequest();
+			console.log(document.regis.username.value); 
 			xhttp.open("GET", "Register?username=" + document.regis.username.value + "&password=" + document.regis.password.value 
 					+ "&confirmPassword=" + document.regis.confirmPassword.value + "&fullName=" + document.regis.fullName.value
 					+ "&email=" + document.regis.email.value, false);
@@ -91,7 +92,7 @@
 				
 				document.getElementById("youGoofed").innerHTML = xhttp.responseText;
 				return false; 
-			}
+			} 
 			
 			
 			return true;
