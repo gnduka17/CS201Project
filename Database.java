@@ -76,8 +76,8 @@ public class Database {
 		ResultSet rs = null;
 		
 		String transactionSearch = "SELECT * FROM Transactions WHERE buyerID = ?";
-		String productSearch = "SELECT productName, productPrice FROM Products WHERE productID = ?";
-		String sellerSearch = "SELECT Name FROM Users WHERE userID = ?";
+		String productSearch = "SELECT productName, productPrice FROM Product WHERE productID = ?";
+		String sellerSearch = "SELECT Name FROM User WHERE userID = ?";
 		
 		List<Transaction> output = new ArrayList<Transaction>();
 		

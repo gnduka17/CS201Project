@@ -12,8 +12,10 @@
 	<link rel="stylesheet" href="main.css">
 	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
 <%
-	session.setAttribute("userID", 1);
+//	Delete next two lines once files are integrated
+	session.setAttribute("userID", 2);
 	session.setAttribute("name","Max");
+
 	List<Transaction> sellerList = Database.getSellingTransactions((Integer)session.getAttribute("userID"));
 	List<Transaction> buyerList = Database.getBuyingTransactions((Integer)session.getAttribute("userID"));
 %>
@@ -98,13 +100,13 @@
 	<table>
 		<tr><th style="padding-right:25em">Item Name</th><th style="padding-right:8em">Price</th><th style="padding-right:10em">Requested By</th></tr>
 	<%for(int i = 0; i < sellerList.size(); i++) {%>
-		<tr id="<%= i%>"><td><%= sellerList.get(i).getProductName()%></td><td>$<%= sellerList.get(i).getPrice()%></td>
+		<tr id="<%= i%>"><td><a href="GetProductDetails?productID=<%= sellerList.get(i).getProductID()%>"><%= sellerList.get(i).getProductName()%></a></td><td>$<%= sellerList.get(i).getPrice()%></td>
 		<td><table>
 		<%
 		int j = 0;
 		for(Map.Entry<Integer,String> entry : sellerList.get(i).getUser().entrySet()) {%>
 			<tr id="p<%=i%>u<%=j%>">
-				<td><%= entry.getValue()%></td>
+				<td><a href="GetUser?userID=<%= entry.getKey()%>"><%= entry.getValue()%></a></td>
 				<td><form action="rating.jsp" onsubmit="accept(<%= i%>,<%= sellerList.get(i).getProductID()%>)">
 						<input type="submit" value="Accept">
 						<input type="hidden" name="sellerID" value="<%= session.getAttribute("userID")%>">
@@ -127,11 +129,11 @@
 	<table>
 		<tr><th style="padding-right:25em">Item Name</th><th style="padding-right:8em">Price</th><th style="padding-right:10em">Sold By</th></tr>
 	<%for(int i = 0; i < buyerList.size(); i++) {%>
-		<tr id="b<%=i%>"><td><%= buyerList.get(i).getProductName()%></td><td>$<%= buyerList.get(i).getPrice()%></td>
+		<tr id="b<%=i%>"><td><a href="GetProductDetails?productID=<%= buyerList.get(i).getProductID()%>"><%= buyerList.get(i).getProductName()%></a></td><td>$<%= buyerList.get(i).getPrice()%></td>
 		<td><table>
 		<%for(Map.Entry<Integer,String> entry : buyerList.get(i).getUser().entrySet()) {%>
 			<tr>
-				<td><%= entry.getValue()%></td>
+				<td><a href="GetUser?userID=<%= entry.getKey()%>"><%= entry.getValue()%></a></td>
 				<td>
 					<form action="javascript:void(0);" onsubmit="cancel(<%= i%>,<%= buyerList.get(i).getProductID()%>,<%= entry.getKey()%>)">
 						<input type="submit" value="Cancel">
