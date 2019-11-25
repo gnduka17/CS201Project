@@ -76,9 +76,10 @@ public class Register extends HttpServlet {
 	    	}
 	    	
 	    	if(password.equals(confPassword)) {
-	    		
+	    		//buyer id and //user id 
 	    		session.setAttribute("username", username);
 	    		session.setAttribute("loggedIn", "true");
+	    		
 	    		//Insert user into database 
 	    		preparedStatement = connection1.prepareStatement("INSERT INTO user(name,username,email,password,rating,ratingCount) VALUES(?,?,?,?,?,?)");
 	    		preparedStatement.setString(1, fullName);
@@ -91,8 +92,14 @@ public class Register extends HttpServlet {
 				//name,username,email,password,rating,ratingCount
 				preparedStatement.execute();
 	    		
-	    		
+				preparedStatement = connection1.prepareStatement("SELECT * FROM user WHERE username='" + username + "'"); 
+		    	rs = preparedStatement.executeQuery();
+		    	
+		    	int id = rs.getInt("userID"); 
+		    	session.setAttribute("userID", id);
+		    	session.setAttribute("name", rs.getString("name"));
 	    	}else {
+	    		
 	    		
 	    		out.println("Passwords do not match"); 
 	    		return;
