@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="java.util.Iterator" import="java.util.Map" import="final_project.Product"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="java.util.Iterator" import="java.util.Map" import="cs201Project.Product" import="java.sql.Blob" import="java.io.OutputStream" import="java.net.URL;"%>
     
 <% 
 	ArrayList<Product> results = (ArrayList<Product>)request.getAttribute("resultList");
@@ -206,13 +206,13 @@
 				String productName = p.getProductName();
 				String sellerName = p.getSellerName();
 				double productPrice = p.getProductPrice();
-				
+
 		%>
 			<a href="GetProductDetails?productID=<%=productID%>">
 			<div class="searchResult">
-				<div class="productPicture"></div>
+				<div class="productPicture"><img src="ImageServlet?productID=<%=productID%>"></div>
 				<p class="productTitle"><%=productName%></p>
-				<p class="productSeller">@<%=sellerName%></p>
+				<p class="productSeller"><%=sellerName%></p>
 				<p class="productPrice">$<%=productPrice%></p>
 
 				<div class="clearfloat"></div>
