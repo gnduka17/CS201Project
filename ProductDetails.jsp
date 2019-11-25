@@ -118,8 +118,8 @@
 
 		<div id="thumbnail-container">
 			<img id="thumbnailPicture" src="" alt="thumbnail">
-			<a id="buy_button" onclick="addRequest()" style="display:none; border-style:solid; position:relative; top:20px;">BUY</a>
-			<a id="rem_button" onclick="removeRequest()" style="display:none; border-style:solid; position:relative; top:20px;">REMOVE</a>
+			<a id="buy_button" onclick="addRequest()" style="display:none; border-style:solid; position:relative; top:20px; cursor: pointer;">BUY</a>
+			<a id="rem_button" onclick="removeRequest()" style="display:none; border-style:solid; position:relative; top:20px; cursor: pointer;">REMOVE</a>
 		</div> <!-- #thumbnail-container -->
 
 		<div id="details-container">
@@ -154,9 +154,7 @@
 	</div> <!-- #main-container -->
 
 <script>
-console.log("hi");
 function loadButton(){
-	console.log("hi");
 	var xhttp= new XMLHttpRequest();
 	var buyerID = <%=buyerID%>;
 	var productID = <%=productID%>;

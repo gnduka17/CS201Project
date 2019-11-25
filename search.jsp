@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="java.util.Iterator" import="java.util.Map" import="backend.Product"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="java.util.Iterator" import="java.util.Map" import="final_project.Product"%>
     
 <% 
 	ArrayList<Product> results = (ArrayList<Product>)request.getAttribute("resultList");
@@ -208,7 +208,7 @@
 				double productPrice = p.getProductPrice();
 				
 		%>
-			<a href="DetailsServlet?productID=<%=productID%>">
+			<a href="GetProductDetails?productID=<%=productID%>">
 			<div class="searchResult">
 				<div class="productPicture"></div>
 				<p class="productTitle"><%=productName%></p>
