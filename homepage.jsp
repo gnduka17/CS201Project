@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+	int userID = (int) session.getAttribute("userID");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -143,7 +149,7 @@
 
 			<ul id="menu">
 				<a class="menuItem" href="homepage.html"><li>Home</li></a>
-				<a class="menuItem" href="UserProfile.jsp"><li>My Profile</li></a>
+				<a class="menuItem" href="GetUser?userID=<%=userID%>"><li>My Profile</li></a>
 				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
 				<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
 				<a id="signOutButton" href="#">LOG OUT</a>
