@@ -5,8 +5,6 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Product Details</title>
-	
-	
 	<link rel="stylesheet" href="main.css">
 	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -79,6 +77,9 @@
 </head>
 
 <%
+	HttpSession sesh = request.getSession(false);
+	//String logged = (String)sesh.getAttribute("loggedIn");
+	//int userID = (int)sesh.getAttribute("userID");
 	int productID = (int)request.getAttribute("productID");
 	String name = (String)request.getAttribute("productName");
 	String description = (String)request.getAttribute("productDescription");
@@ -87,7 +88,8 @@
 	String category = (String)request.getAttribute("productCategory");
 	int sellerID = (int)request.getAttribute("sellerID");
 	String sellerName = (String)request.getAttribute("sellerName");
-	int buyerID = 1;  //get session attribute
+	int buyerID = 2;
+	String logged = "true";
 %>
 <body onload="loadButton()">
 	<div id="navbar">
@@ -99,9 +101,10 @@
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="#"><li>Shop Page</li></a>
-				<a class="menuItem" href="#"><li>My Profile</li></a>
-				<a class="menuItem" href="#"><li>Add Item</li></a>
+				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
+				<a class="menuItem" href="GetUser?userID=1"><li>My Profile</li></a>
+				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
+				<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
 				<a id="signOutButton" href="#">LOG OUT</a>
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
@@ -112,23 +115,24 @@
 		</form>
 	</div> <!-- #navbar -->
 
-	<a id="back-button" href="" onclick="history.back()"><span id="backArrow"class="oi" data-glyph="arrow-left"></span> GO BACK</a>
+	<a id="back-button" onclick="history.back()"><span id="backArrow"class="oi" data-glyph="arrow-left"></span> GO BACK</a>
 
 	<div id="main-container">
 
 		<div id="thumbnail-container">
 			<img id="thumbnailPicture" src="" alt="thumbnail">
 			<a id="buy_button" onclick="addRequest()" style="display:none; border-style:solid; position:relative; top:20px; cursor: pointer;">BUY</a>
-			<a id="rem_button" onclick="removeRequest()" style="display:none; border-style:solid; position:relative; top:20px; cursor: pointer;">REMOVE</a>
 		</div> <!-- #thumbnail-container -->
 
 		<div id="details-container">
 			<div id="productName"><%=name%></div>
 			
 			<i>
-				<div id="productSeller">Seller: 
-					<p class="productDetails" id="demo" style="cursor: pointer;"><%=sellerName%></p>
-				</div>
+				<a href="GetUser?userID=<%=sellerID%>">
+					<div id="productSeller">Seller: 
+						<p class="productDetails" style="cursor: pointer;"><%=sellerName%></p>
+					</div>
+				</a>
 			</i>
 			
 			<div id="productPrice">Price: 
@@ -156,72 +160,35 @@
 <script>
 function loadButton(){
 	var xhttp= new XMLHttpRequest();
+	var logged = <%=logged%>;
+	var sellerID = <%=sellerID%>;
 	var buyerID = <%=buyerID%>;
 	var productID = <%=productID%>;
 	xhttp.open("GET","CheckRequest?buyerID=" + buyerID + "&productID=" + productID, false);
 	xhttp.send();
-	if(xhttp.responseText.trim().length>0){  //already exists
-		document.getElementById("rem_button").style.display = "inline";
-	}
-	else{  //doesnt exist 
+	//product is not already requested, user is not the seller, user is logged in
+	if(xhttp.responseText.trim().length==0 && sellerID!=buyerID && logged==true){  
 		document.getElementById("buy_button").style.display = "inline";
 	}
 }
 function addRequest(){
-	var logged = <%= session.getAttribute("logged")%>;
-	var buyerID = <%=buyerID%>;
-	var sellerID = <%=sellerID%>;
-	var productID = <%=productID%>;
-	if(logged==null || logged==""){  //not logged in
-		alert("Need to log in");
-	}
-	else{   //logged in
-		$.ajax({
-			url: "UpdateRequest",
-			data:{
-				buyerID: buyerID,
-				sellerID: sellerID,
-				productID: productID,
-				index: "1"
-			},
-			success: function(){
-				alert("Successfully added");
-			}
-		})
-	}
-}
-function removeRequest(){
 	var buyerID = <%=buyerID%>;
 	var sellerID = <%=sellerID%>;
 	var productID = <%=productID%>;
 	$.ajax({
-		url: "UpdateRequest",
+		url: "AddRequest",
 		data:{
 			buyerID: buyerID,
 			sellerID: sellerID,
 			productID: productID,
-			index: "2"
 		},
 		success: function(){
-			alert("Successfully removed");
+			alert("Successfully added");
+			document.getElementById("buy_button").style.display = "none";
 		}
 	})
 }
-document.getElementById("demo").addEventListener("click", sendtoUser);
-function sendtoUser(){
-	var sellerID = <%=sellerID%>;
-	console.log(sellerID);
-	$.ajax({
-		url: "GetUser",
-		data:{
-			userID: sellerID
-		},
-		success: function(response){
-			$("html").empty();
-			$("html").append(response);
-		}
-	})
-}
+
 </script>
 </body>
 </html>

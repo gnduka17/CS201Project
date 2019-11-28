@@ -8,7 +8,8 @@
 
 	<link rel="stylesheet" href="main.css">
 	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
 	<style>
 		#main-container {
 			width: 800px;
@@ -48,6 +49,17 @@
 		#products-container {
 			margin-top: 80px;
 		}
+		#productPicture{
+			width: 130px;
+			height: 170px;
+			background-color: gray;
+			float: left;
+		}
+		#productName {
+			font-size: 2em;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
 	</style>
 
 </head>
@@ -72,9 +84,10 @@
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="#"><li>Shop Page</li></a>
-				<a class="menuItem" href="#"><li>My Profile</li></a>
-				<a class="menuItem" href="#"><li>Add Item</li></a>
+				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
+				<a class="menuItem" href="GetUser?userID=1"><li>My Profile</li></a>
+				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
+				<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
 				<a id="signOutButton" href="#">LOG OUT</a>
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
@@ -115,30 +128,47 @@
 			ArrayList<Product> items = user.getItems(userID);
 			for(int i=0; i<items.size(); i++){
 			%>
-				<table style="border-bottom: 1px solid black;">
+			<table style="border-bottom: 1px solid gray; width:800px;">
+				<tr>
 					<div id="profileProducts">
-						<tr>
-							<td>
-								<img src="" alt="Item Picture" style="border-style:solid;">
-							</td>
-							<td>
-								<p id="profileName">Product name: <%=items.get(i).getProductName()%> </p>
-								<em>
-									<p class="details">Seller: <%=items.get(i).getSellerName()%> </p>
-								</em>
-								<br>
-								<p class="details">Price: <%=items.get(i).getProductPrice()%> </p>
-							</td>
-						</tr>
+						<td>
+							<div id="productPicture">
+							</div>
+						</td>
+						<td>
+							<a href="GetProductDetails?productID=<%=items.get(i).getProductID()%>">
+								<p id="productName">Product name: <%=items.get(i).getProductName()%> </p>
+							</a>
+							<em>
+								<p class="details">Seller: <%=items.get(i).getSellerName()%> </p>
+							</em>
+							<br>
+							<p class="details">Price: <%=items.get(i).getProductPrice()%> </p>
+						</td>
+						<td>
+							<a id="remove_button" onclick="removeRequest(<%=items.get(i).getProductID()%>)" style="border-style:solid; position:relative; top:20px; cursor: pointer;">REMOVE</a>
+						</td>
 					</div> <!-- #profileProducts -->
+				</tr>
 			<% 
 			} 
 			%>
-				
 			</table>
-		</div>
+		</div> <!-- #products-container -->
 	
 	</div> <!-- #main-container -->
-
 </body>
+<script>
+function removeRequest(productID){
+	$.ajax({
+		url: "DeleteItem",
+		data:{
+			productID: productID
+		},
+		success: function(response){
+			alert("Successfully deleted");
+		}
+	})
+}
+</script>
 </html>
