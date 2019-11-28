@@ -51,7 +51,7 @@ width:150px;
 }
 #blankspot{
 margin-top:20px;
-width:150px;
+width:250px;
 height:250px;
 background-color:grey;
 display:flex;
@@ -94,20 +94,20 @@ justify-content:center;
 		</a>
 		
 	</div> <!-- #navbar -->
-	<h1>Add Item</h1>
+	<h1 style="margin-left:40px; padding-top:20px;">Add Item</h1>
 <div id = "content">
 
-<form id = addItemForm method="GET" action="insertItemServlet">
+<form id = addItemForm method="POST" action="insertItemServlet" enctype="multipart/form-data">
 <div id="leftmost">
 Name<br/>
-<input type="text" name = "productName" id="productName"/>
+<input type="text" name = "productName" id="productName" value=""/>
 <br/><br/><br/><br/>
 Price<br/>
-$ <input id="price" type="number" name= "prodprice" min="0.00" step="0.01" max="2500" value="0.00" />
+$ <input id="price" type="number" name= "prodprice" min="0.00" step="0.01" max="2500" value=""/>
 <br/><br/><br/><br/>
 Condition<br/>
 <select name="condition" id="conditionDropDown">
-<option value="selectOne">Select a Condition</option>
+<option value="">Select a Condition</option>
 <option value="new">New</option>
 <option value="good">Good</option>
 <option value="used">Used</option>
@@ -115,7 +115,7 @@ Condition<br/>
 <br/><br/><br/><br/>
 Category<br/>
 <select name="category" id="categoryDropDown">
-<option value="selectOne">Select a Category</option>
+<option value="">Select a Category</option>
 <option value="books">Textbooks</option>
 <option value="furniture">Furniture</option>
 <option value="technology">Technology</option>
@@ -137,10 +137,8 @@ Product Description<br/>
 
 </div>
 
-
-
 <br/>
-<input type="file" onchange="readURL(this);"/>
+<input id="uploadimg" type="file" name="image" onchange="readURL(this);" value="" accept="image/png, .jpeg, .jpg, image/gif"/>
 <br/><br/><br/>
 
 <input id="addButt" type="submit" value="Add Item"/>
@@ -157,11 +155,31 @@ function readURL(input) {
         reader.onload = function (e) {
             $('#productIMG')
                 .attr('src', e.target.result)
-                .width(150)
+                .width(250)
                 .height(250);
         };
         reader.readAsDataURL(input.files[0]);
     }
+    console.log("image location is:" + $('#uploadimg').val() );
 }
+
+(function() {
+    $('form > input,number,text,select').keyup(function() {
+
+        var empty = false;
+        $('form > input,number,text,select').each(function() {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('#addButt').attr('disabled', 'disabled');
+        } else {
+            $('#addButt').removeAttr('disabled');
+        }
+    });
+})()
+
 </script>
 </html>

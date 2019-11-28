@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList" import="java.util.Iterator" import="java.util.Map" import="final_project.Product"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList" import="java.util.Iterator" import="java.util.Map" import="cs201Project.Product" import="java.sql.Blob" import="java.io.OutputStream" import="java.net.URL"%>
     
 <% 
 	ArrayList<Product> results = (ArrayList<Product>)request.getAttribute("resultList");
@@ -83,8 +83,12 @@
 		.productPicture {
 			width: 280px;
 			height: 280px;
-			background-color: whitesmoke;
+			/* background-color: whitesmoke; */
 			float: left;
+		}
+		#imagepic{
+		width:280px;
+		height:280px;
 		}
 		.productTitle {
 			width: 280px;
@@ -200,25 +204,29 @@
 
 	<div id="main-container">
 		<%	
+		HttpSession sess;
+		sess = request.getSession();
+		System.out.println("result size is:" + results.size());
 			for(int i = 0; i < results.size(); i++) {
 				Product p = results.get(i);
 				int productID = p.getProductID();
 				String productName = p.getProductName();
 				String sellerName = p.getSellerName();
 				double productPrice = p.getProductPrice();
-				
+				sess.removeAttribute("product");
+				sess.setAttribute("product", p.getImage());
 		%>
-			<a href="GetProductDetails?productID=<%=productID%>">
-			<div class="searchResult">
-				<div class="productPicture"></div>
-				<p class="productTitle"><%=productName%></p>
-				<p class="productSeller">@<%=sellerName%></p>
-				<p class="productPrice">$<%=productPrice%></p>
-
-				<div class="clearfloat"></div>
-			</div></a> <!-- #searchResult -->
+	<a href="DetailsServlet?productID=<%=productID%>">
+	<div class="searchResult">
+		<div class="productPicture">
+			<img id="imagepic" src="imageServlet"/>
+		</div>
+		<p class="productTitle"><%=productName%></p>
+		<p class="productSeller">@<%=sellerName%></p>
+		<p class="productPrice">$<%=productPrice%></p>
+		<div class="clearfloat"></div>
+	</div></a> <!-- #searchResult -->
 		<% } %>
-
 	</div> <!-- #main-container -->
 	
 	

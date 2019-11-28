@@ -1,11 +1,14 @@
-package final_project;
+package cs201Project;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -77,6 +80,7 @@ public class SearchServlet extends HttpServlet {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		int count = 0;
 		
 		for(int i = 0; i < keywords.length; i++) {
 			String searchString = "SELECT * FROM Product WHERE productName LIKE ?";
@@ -89,6 +93,7 @@ public class SearchServlet extends HttpServlet {
 				rs = ps.executeQuery();
 				
 				while(rs.next()) {
+					count++;
 					// Get product information
 					int productID = rs.getInt("productID");
 					String productName = rs.getString("productName");
@@ -98,14 +103,15 @@ public class SearchServlet extends HttpServlet {
 					String productCategory = rs.getString("productCategory");
 					int sellerID = rs.getInt("sellerID");
 					String sellerName = rs.getString("sellerName");
-						
+					Blob holder = rs.getBlob("image");
 					// Create new Project object
 					Product newProduct = new Product(productID, productName, productPrice, productCondition, productDescription, productCategory, sellerID, sellerName);
-					
+					if(holder!=null) {
+						newProduct.setImage(holder);
+					}
 					// Insert search result into the results HashMap
 					resultsMap.put(productID, newProduct);
 				}
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -125,6 +131,7 @@ public class SearchServlet extends HttpServlet {
 				}
 			}
 		}
+		System.out.println("the amount object in database with that name: "+ count);
 		
 		String sortName = request.getParameter("sortName");
 		String sortPrice = request.getParameter("sortPrice");
