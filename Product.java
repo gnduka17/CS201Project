@@ -1,4 +1,6 @@
-package final_project;
+package cs201Project;
+
+import java.sql.Blob;
 
 public class Product {
 	
@@ -10,6 +12,7 @@ public class Product {
 	private String productCategory;
 	private int sellerID;
 	private String sellerName;
+	private Blob picture = null;
 	
 	public Product(int productID, String productName, double productPrice, String productCondition,
 			String productDescription, String productCategory, int sellerID, String sellerName) {
@@ -52,5 +55,11 @@ public class Product {
 	}
 	public String getSellerName() {
 		return sellerName;
+	}
+	public void setImage(Blob a) {
+		picture = a;
+	}
+	public Blob getImage() {
+		return picture;
 	}
 }
