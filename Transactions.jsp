@@ -13,7 +13,7 @@
 	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
 <%
 //	Delete next two lines once files are integrated
-	session.setAttribute("userID", 2);
+	session.setAttribute("userID", 1);
 	session.setAttribute("name","Max");
 
 	List<Transaction> sellerList = Database.getSellingTransactions((Integer)session.getAttribute("userID"));
@@ -109,8 +109,8 @@
 				<td><a href="GetUser?userID=<%= entry.getKey()%>"><%= entry.getValue()%></a></td>
 				<td><form action="rating.jsp" onsubmit="accept(<%= i%>,<%= sellerList.get(i).getProductID()%>)">
 						<input type="submit" value="Accept">
-						<input type="hidden" name="sellerID" value="<%= session.getAttribute("userID")%>">
 						<input type="hidden" name="buyerID" value="<%= entry.getKey()%>">
+						<input type="hidden" name="buyerName" value="<%= entry.getValue()%>">
 					</form>
 					<form action="javascript:void(0);" onsubmit="reject(<%= i%>,<%=j%>,<%= sellerList.get(i).getProductID()%>,<%= entry.getKey()%>)">
 						<input type="submit" value="Reject">
@@ -135,7 +135,7 @@
 			<tr>
 				<td><a href="GetUser?userID=<%= entry.getKey()%>"><%= entry.getValue()%></a></td>
 				<td>
-					<form action="javascript:void(0);" onsubmit="cancel(<%= i%>,<%= buyerList.get(i).getProductID()%>,<%= entry.getKey()%>)">
+					<form action="javascript:void(0);" onsubmit="cancel(<%= i%>,<%= buyerList.get(i).getProductID()%>,<%= session.getAttribute("userID")%>)">
 						<input type="submit" value="Cancel">
 					</form>
 				</td>

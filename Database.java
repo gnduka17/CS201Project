@@ -137,6 +137,7 @@ public class Database {
 		PreparedStatement ps = null;
 		
 		String deleteTransaction = "DELETE FROM Transactions WHERE productID = ?";
+//		String deleteProduct = "DELETE FROM Product WHERE productID = ?";
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://google/silcData?"
@@ -149,6 +150,14 @@ public class Database {
 			if(ps.executeUpdate()==0) {
 				return false;
 			}
+			
+//			ps = conn.prepareStatement(deleteProduct);
+//			ps.setInt(1, productID);
+//			
+//			if(ps.executeUpdate()==0) {
+//				return false;
+//			}
+			
 			return true;
 			
 		} catch (SQLException e) {
@@ -184,6 +193,43 @@ public class Database {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public static void addRating(int buyerID, int rating) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String searchRating = "SELECT rating, ratingCount FROM User WHERE userID = ?";
+		String updateRating = "UPDATE User SET rating = ?, ratingCount = ? WHERE userID = ?";
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://google/silcData?"
+						+ "cloudSqlInstance=cs201silcproject:us-west1:cs201group&socketFactory=com.google.cloud.sql.mysql.SocketFactory"
+						+ "&useSSL=false&user=maxwell&password=0000");
+			
+			ps = conn.prepareStatement(searchRating);
+			ps.setInt(1, buyerID);
+			rs = ps.executeQuery();
+			
+			rs.next();
+			
+			double currRating = rs.getDouble(1);
+			int ratingCount = rs.getInt(2);
+			
+			currRating = (currRating+rating)/(++ratingCount);
+			
+			ps = conn.prepareStatement(updateRating);
+			ps.setDouble(1, currRating);
+			ps.setInt(2, ratingCount);
+			ps.setInt(3, buyerID);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
