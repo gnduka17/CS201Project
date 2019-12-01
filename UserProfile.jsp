@@ -70,8 +70,8 @@
 	double rating = (double)request.getAttribute("rating");
 	int userID = (int)request.getAttribute("userID");
 %>
-<%@ page import="final_project.GetUserItems"%>
-<%@ page import="final_project.Product"%>
+<%@ page import="cs201Project.GetUserItems"%>
+<%@ page import="cs201Project.Product"%>
 <%@ page import="java.util.ArrayList" %>
 <body>
 	

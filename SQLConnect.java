@@ -1,7 +1,7 @@
-package final_project;
+package cs201Project;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import final_project.SQLOver;
+import cs201Project.SQLOver;
 
 public class SQLConnect implements SQLOver {
 	

@@ -1,4 +1,4 @@
-package final_project;
+package cs201Project;
 
 public class User {
 	private int userID;
