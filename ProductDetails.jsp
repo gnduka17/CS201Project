@@ -78,7 +78,7 @@
 
 <%
 	HttpSession sesh = request.getSession(false);
-	//String logged = (String)sesh.getAttribute("loggedIn");
+	String logged = (String)sesh.getAttribute("loggedIn");
 	int userID = 0;
 	if(sesh.getAttribute("userID") != null ) {
 		userID = (int)sesh.getAttribute("userID");
@@ -92,9 +92,6 @@
 	int sellerID = (int)request.getAttribute("sellerID");
 	String sellerName = (String)request.getAttribute("sellerName");
 	int buyerID = 2;
-	String logged = "true";
-	
-	
 
 %>
 <body onload="loadButton()">

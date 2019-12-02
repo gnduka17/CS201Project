@@ -83,18 +83,21 @@ public class Register extends HttpServlet {
 				preparedStatement.setString(2, username);
 				preparedStatement.setString(3, email);
 				preparedStatement.setString(4, password); 
-				preparedStatement.setDouble(5,0); 
-				preparedStatement.setInt(6,0); 
+				preparedStatement.setDouble(5,5); 
+				preparedStatement.setInt(6,1); 
 				
 				//name,username,email,password,rating,ratingCount
 				preparedStatement.execute();
 	    		
 				preparedStatement = connection1.prepareStatement("SELECT * FROM User WHERE username='" + username + "'"); 
 		    	rs = preparedStatement.executeQuery();
-		    	
-		    	int id = rs.getInt("userID"); 
-		    	session.setAttribute("userID", id);
-		    	session.setAttribute("name", rs.getString("name"));
+		    	if(rs.next()) {
+			    	int id = rs.getInt("userID"); 
+			    	session.setAttribute("userID", id);
+			    	session.setAttribute("loggedIn", "true");
+					session.setAttribute("username", username);
+			    	session.setAttribute("name", rs.getString("name"));
+		    	}
 	    	}else {
 	    		
 	    		

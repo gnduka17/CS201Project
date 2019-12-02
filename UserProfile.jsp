@@ -81,6 +81,7 @@
 	}
 	String username = (String)sesh.getAttribute("username");
 %>
+
 <%@ page import="cs201Project.GetUserItems"%>
 <%@ page import="cs201Project.Product"%>
 <%@ page import="java.util.ArrayList" %>
@@ -147,7 +148,7 @@
 			%>
 			<table style="border-bottom: 1px solid gray; width:800px;">
 				<tr>
-					<div id="profileProducts">
+					<div id="<%=items.get(i).getProductID()%>">
 						<td>
 							<div id="productPicture">
 							</div>
@@ -184,6 +185,7 @@ function removeRequest(productID){
 		},
 		success: function(response){
 			alert("Successfully deleted");
+			document.getElementById(productID).style.display = "none";
 		}
 	})
 }
