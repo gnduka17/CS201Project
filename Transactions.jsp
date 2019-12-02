@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="cs201Project.Database" %>
-<%@ page import="cs201Project.Transaction" %>
+<%@ page import="final_project.Database" %>
+<%@ page import="final_project.Transaction" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <!DOCTYPE html>
@@ -12,11 +12,9 @@
 	<link rel="stylesheet" href="main.css">
 	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
 <%
-	HttpSession sesh = request.getSession(false);
-	int userID = 0;
-	if(sesh.getAttribute("userID") != null ) {
-		userID = (int)sesh.getAttribute("userID");
-	}
+//	Delete next two lines once files are integrated
+	session.setAttribute("userID", 1);
+	session.setAttribute("name","Max");
 
 	List<Transaction> sellerList = Database.getSellingTransactions((Integer)session.getAttribute("userID"));
 	List<Transaction> buyerList = Database.getBuyingTransactions((Integer)session.getAttribute("userID"));
@@ -85,16 +83,10 @@
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
-				<% if(!username.equalsIgnoreCase("guest")) { %>
-					<a class="menuItem" href="GetUser?userID=<%=userID%>" ><li>My Profile</li></a>
-					<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
-					<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
-					<a id="signOutButton" href="Signout">LOG OUT</a>
-				<% } else { %>
-					<a id="signOutButton" href="login.jsp">LOG IN</a>
-				<% } %>
-				
+				<a class="menuItem" href="#"><li>Shop Page</li></a>
+				<a class="menuItem" href="#"><li>My Profile</li></a>
+				<a class="menuItem" href="#"><li>Add Item</li></a>
+				<a id="signOutButton" href="#">LOG OUT</a>
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
@@ -129,8 +121,8 @@
 				<td><a href="GetUser?userID=<%= entry.getKey()%>"><%= entry.getValue()%></a></td>
 				<td><form action="rating.jsp" onsubmit="accept(<%= i%>,<%= sellerList.get(i).getProductID()%>)">
 						<input type="submit" value="Accept">
-						<input type="hidden" name="sellerID" value="<%= session.getAttribute("userID")%>">
 						<input type="hidden" name="buyerID" value="<%= entry.getKey()%>">
+						<input type="hidden" name="buyerName" value="<%= entry.getValue()%>">
 					</form>
 					<form action="javascript:void(0);" onsubmit="reject(<%= i%>,<%=j%>,<%= sellerList.get(i).getProductID()%>,<%= entry.getKey()%>)">
 						<input type="submit" value="Reject">
@@ -155,7 +147,7 @@
 			<tr>
 				<td><a href="GetUser?userID=<%= entry.getKey()%>"><%= entry.getValue()%></a></td>
 				<td>
-					<form action="javascript:void(0);" onsubmit="cancel(<%= i%>,<%= buyerList.get(i).getProductID()%>,<%= entry.getKey()%>)">
+					<form action="javascript:void(0);" onsubmit="cancel(<%= i%>,<%= buyerList.get(i).getProductID()%>,<%= session.getAttribute("userID")%>)">
 						<input type="submit" value="Cancel">
 					</form>
 				</td>
