@@ -13,9 +13,6 @@
 	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
 <%
 //	Delete next two lines once files are integrated
-	session.setAttribute("userID", 1);
-	session.setAttribute("name","Max");
-
 	List<Transaction> sellerList = Database.getSellingTransactions((Integer)session.getAttribute("userID"));
 	List<Transaction> buyerList = Database.getBuyingTransactions((Integer)session.getAttribute("userID"));
 %>
