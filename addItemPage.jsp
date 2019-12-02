@@ -113,15 +113,18 @@ justify-content:center;
 <div id = "content">
 
 <form id = addItemForm method="POST" action="insertItemServlet" enctype="multipart/form-data">
+<input type="text" name="fullName" value="<%=username%>" style="display:none;">
+<input type="text" name="userID" value="<%=userID%>" style="display:none;">
+
 <div id="leftmost">
 Name<br/>
-<input type="text" name = "productName" id="productName" value=""/>
+<input type="text" name = "productName" id="productName" value="" required/>
 <br/><br/><br/><br/>
 Price<br/>
-$ <input id="price" type="number" name= "prodprice" min="0.00" step="0.01" max="2500" value=""/>
+$ <input id="price" type="number" name= "prodprice" min="0.00" step="0.01" max="2500" value="" required/>
 <br/><br/><br/><br/>
 Condition<br/>
-<select name="condition" id="conditionDropDown">
+<select name="condition" id="conditionDropDown" required>
 <option value="">Select a Condition</option>
 <option value="new">New</option>
 <option value="good">Good</option>
@@ -129,22 +132,20 @@ Condition<br/>
 </select>
 <br/><br/><br/><br/>
 Category<br/>
-<select name="category" id="categoryDropDown">
+<select name="category" id="categoryDropDown" required>
 <option value="">Select a Category</option>
 <option value="books">Textbooks</option>
 <option value="furniture">Furniture</option>
-<option value="technology">Technology</option>
 <option value="tickets">Tickets</option>
-<option value="clothing">Clothing/Fashion</option>
-<option value="food">Food</option>
+<option value="clothing">Clothing</option>
 <option value="housing">Housing</option>
-<option value="other">Misc.</option>
+<option value="misc">Misc.</option>
 </select>
 <br/><br/><br/><br/>
 </div>
 <div id="middle">
 Product Description<br/>
-<textarea id="productDesc" name = "productDesc" form ="addItemForm"></textarea>
+<textarea id="productDesc" name = "productDesc" form ="addItemForm" required></textarea>
 </div>
 <div id="rightmost">
 <div id="blankspot">
@@ -153,7 +154,7 @@ Product Description<br/>
 </div>
 
 <br/>
-<input id="uploadimg" type="file" name="image" onchange="readURL(this);" value="" accept="image/png, .jpeg, .jpg, image/gif"/>
+<input id="uploadimg" type="file" name="image" onchange="readURL(this);" value="" accept="image/png, .jpeg, .jpg, image/gif" required/>
 <br/><br/><br/>
 
 <input id="addButt" type="submit" value="Add Item"/>
@@ -179,7 +180,7 @@ function readURL(input) {
 }
 
 (function() {
-    $('form > input,number,text,select').keyup(function() {
+    /* $('form > input,number,text,select').keyup(function() {
 
         var empty = false;
         $('form > input,number,text,select').each(function() {
@@ -193,7 +194,7 @@ function readURL(input) {
         } else {
             $('#addButt').removeAttr('disabled');
         }
-    });
+    }); */
 })()
 
 </script>
