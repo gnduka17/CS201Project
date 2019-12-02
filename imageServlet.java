@@ -39,9 +39,10 @@ public class imageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("entered the imageservlet");
+		String index = (String)request.getParameter("index");
 		HttpSession sess = request.getSession();
 		if(sess!=null) {
-			Blob blob =  (Blob) sess.getAttribute("product");
+			Blob blob =  (Blob) sess.getAttribute("product" + index);
 			byte holderArray[];
 			try {
 				holderArray = blob.getBytes(1, (int)blob.length());

@@ -217,13 +217,12 @@
 				String productName = p.getProductName();
 				String sellerName = p.getSellerName();
 				double productPrice = p.getProductPrice();
-				sess.removeAttribute("product");
-				sess.setAttribute("product", p.getImage());
+				sess.setAttribute("product" + i, p.getImage());
 		%>
-	<a href="GetProductDetails?productID=<%=productID%>">
+	<a href="GetProductDetails?productID=<%=productID%>&index=<%=i%>">
 	<div class="searchResult">
 		<div class="productPicture">
-			<img id="imagepic" src="imageServlet"/>
+			<img id="imagepic" src="imageServlet?index=<%=i%>"/>
 		</div>
 		<p class="productTitle"><%=productName%></p>
 		<p class="productSeller"><%=sellerName%></p>

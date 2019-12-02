@@ -85,6 +85,7 @@
 	}
 	String username = (String)sesh.getAttribute("username");
 	int productID = (int)request.getAttribute("productID");
+	int index = (int)request.getAttribute("index");
 	String name = (String)request.getAttribute("productName");
 	String description = (String)request.getAttribute("productDescription");
 	double price = (double)request.getAttribute("productPrice");
@@ -128,7 +129,7 @@
 	<div id="main-container">
 
 		<div id="thumbnail-container">
-			<img id="thumbnailPicture" src="" alt="thumbnail">
+			<img id="thumbnailPicture" src="imageServlet?index=<%=index%>" alt="thumbnail">
 			<a id="buy_button" onclick="addRequest()" style="display:none; border-style:solid; position:relative; top:20px; cursor: pointer;">BUY</a>
 		</div> <!-- #thumbnail-container -->
 
