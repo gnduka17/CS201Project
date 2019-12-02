@@ -159,11 +159,6 @@
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
-		<a href="notifications.jsp">
-			<div id="notificationIcon">
-				<span class="oi" data-glyph="bell"></span>
-			</div>
-		</a>
 		
 	</div> <!-- #navbar -->
 

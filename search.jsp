@@ -3,6 +3,12 @@
     
 <% 
 	ArrayList<Product> results = (ArrayList<Product>)request.getAttribute("resultList");
+	
+	HttpSession sesh = request.getSession(false);
+	int userID = (int)sesh.getAttribute("userID");
+	String username = (String)sesh.getAttribute("username");
+	
+	
 %>
     
 <!DOCTYPE html>
@@ -136,10 +142,11 @@
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="homepage.html"><li>Home</li></a>
-				<a class="menuItem" href="profile.html"><li>My Profile</li></a>
+				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
+				<a class="menuItem" href="GetUser?userID=<%=userID%>"><li>My Profile</li></a>
 				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
-				<a id="signOutButton" href="#">LOG OUT</a>
+				<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
+				<a id="signOutButton" href="Signout">LOG OUT</a>
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
@@ -149,12 +156,6 @@
 			<input id="searchBar" type="text" name="searchInput" placeholder="Search for products">
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
-		
-		<a href="notifications.jsp">
-			<div id="notificationIcon">
-				<span class="oi" data-glyph="bell"></span>
-			</div>
-		</a>
 		
 	</div> <!-- #navbar -->
 
@@ -216,13 +217,13 @@
 				sess.removeAttribute("product");
 				sess.setAttribute("product", p.getImage());
 		%>
-	<a href="DetailsServlet?productID=<%=productID%>">
+	<a href="GetProductDetails?productID=<%=productID%>">
 	<div class="searchResult">
 		<div class="productPicture">
 			<img id="imagepic" src="imageServlet"/>
 		</div>
 		<p class="productTitle"><%=productName%></p>
-		<p class="productSeller">@<%=sellerName%></p>
+		<p class="productSeller"><%=sellerName%></p>
 		<p class="productPrice">$<%=productPrice%></p>
 		<div class="clearfloat"></div>
 	</div></a> <!-- #searchResult -->

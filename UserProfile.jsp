@@ -26,6 +26,11 @@
 			background-color: gray;
 			border-radius: 100px;
 			float: left;
+			overflow: hidden;
+		}
+		#profilePicture > img {
+			width: 200px;
+			height: 200px;
 		}
 		#profileDetails {
 			padding-left: 40px;
@@ -102,6 +107,7 @@
 	<div id="main-container">
 		<div id="profile-container">
 			<div id="profilePicture">
+				<img src="defaultProfile.jpeg" alt="Default profile picture">
 			</div>
 
 			<div id="profileDetails">
