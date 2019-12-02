@@ -1,5 +1,6 @@
 package cs201Project;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,8 +32,12 @@ public class GetUserItems {
 				String productCategory = rs.getString(6);
 				int sellerID = rs.getInt(7);
 				String sellerName = rs.getString(8);
+				Blob holder = rs.getBlob("image");
 				Product temp = new Product(productID, productName, productPrice, productCondition,
 						productDescription, productCategory, sellerID, sellerName);
+				if(holder!=null) {
+					temp.setImage(holder);
+				}
 				array.add(temp);
 			}
 		}

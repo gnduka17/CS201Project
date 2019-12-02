@@ -158,16 +158,18 @@
 			GetUserItems user = new GetUserItems();
 			ArrayList<Product> items = user.getItems(userID);
 			for(int i=0; i<items.size(); i++){
+				sesh.setAttribute("product" + i, items.get(i).getImage());
 			%>
 			<table style="border-top: 1px solid black; padding: 20px 0px; width:800px;">
 				<tr>
 					<div id="<%=items.get(i).getProductID()%>">
 						<td style="width:160px;">
 							<div id="productPicture">
+								<img src="imageServlet?index=<%=i%>">
 							</div>
 						</td>
 						<td style="width:500px;">
-							<a href="GetProductDetails?productID=<%=items.get(i).getProductID()%>" style="text-decoration:none;color:black;">
+							<a href="GetProductDetails?productID=<%=items.get(i).getProductID()%>&index=<%=i%>" style="text-decoration:none;color:black;">
 								<p id="productName" style="margin:0px 0px 20px 0px;font-size:1.6em;"><%=items.get(i).getProductName()%> </p>
 							</a>
 							<p class="details" style="font-size:1.2em;">Seller: <em><%=items.get(i).getSellerName()%></em></p>
