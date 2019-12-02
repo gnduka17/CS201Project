@@ -102,12 +102,6 @@ justify-content:center;
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
 		
-		<a href="notifications.jsp">
-			<div id="notificationIcon">
-				<span class="oi" data-glyph="bell"></span>
-			</div>
-		</a>
-		
 	</div> <!-- #navbar -->
 	<h1 style="margin-left:40px; padding-top:20px;">Add Item</h1>
 <div id = "content">

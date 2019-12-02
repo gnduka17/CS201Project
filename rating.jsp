@@ -49,12 +49,6 @@
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
 		
-		<a href="notifications.jsp">
-			<div id="notificationIcon">
-				<span class="oi" data-glyph="bell"></span>
-			</div>
-		</a>
-		
 	</div> <!-- #navbar -->
 	<div style="margin: 10%">
 		<h1 style="margin-bottom: 50px">How would you rate <%=request.getParameter("buyerName") %>?</h1>
