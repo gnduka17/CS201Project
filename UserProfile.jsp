@@ -73,7 +73,12 @@
 	String name = (String)request.getAttribute("name");
 	String email = (String)request.getAttribute("email");
 	double rating = (double)request.getAttribute("rating");
-	int userID = (int)request.getAttribute("userID");
+	HttpSession sesh = request.getSession(false);
+	int userID = 0;
+	if(sesh.getAttribute("userID") != null ) {
+		userID = (int)sesh.getAttribute("userID");
+	}
+	String username = (String)sesh.getAttribute("username");
 %>
 <%@ page import="cs201Project.GetUserItems"%>
 <%@ page import="cs201Project.Product"%>
@@ -90,10 +95,15 @@
 
 			<ul id="menu">
 				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
-				<a class="menuItem" href="GetUser?userID=1"><li>My Profile</li></a>
-				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
-				<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
-				<a id="signOutButton" href="#">LOG OUT</a>
+				<% if(!username.equalsIgnoreCase("guest")) { %>
+					<a class="menuItem" href="GetUser?userID=<%=userID%>" ><li>My Profile</li></a>
+					<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
+					<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
+					<a id="signOutButton" href="Signout">LOG OUT</a>
+				<% } else { %>
+					<a id="signOutButton" href="login.jsp">LOG IN</a>
+				<% } %>
+				
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 

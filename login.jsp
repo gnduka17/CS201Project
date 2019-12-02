@@ -130,7 +130,7 @@ function validate2(){
 		</form>
 		<br>
 		<p>Don't have an account yet? <a href="register.jsp">REGISTER</a></p>
-		<p>Or log in as a guest? <a href="javascript:validate2()"> GUEST</a> </p>
+		<p>Or log in as a guest? <a href="Login?username=guest&password=guest"> GUEST</a> </p>
 
 	</div> <!-- #login-container -->
 </body>

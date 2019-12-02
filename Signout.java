@@ -1,3 +1,4 @@
+package cs201Project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,7 +43,7 @@ public class Signout extends HttpServlet {
     	request.setAttribute("username", null);
     	request.setAttribute("loggedIn", "false");
     	
-    	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Login.jsp"); 
+    	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/login.jsp"); 
     	dispatch.forward(request,response);
     }
     

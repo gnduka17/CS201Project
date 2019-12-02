@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	HttpSession sesh = request.getSession(false);
+	int userID = 0;
+	if(sesh.getAttribute("userID") != null ) {
+		userID = (int)sesh.getAttribute("userID");
+	}
+	String username = (String)sesh.getAttribute("username");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,10 +82,16 @@ justify-content:center;
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="homepage.html"><li>Home</li></a>
-				<a class="menuItem" href="profile.html"><li>My Profile</li></a>
-				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
-				<a id="signOutButton" href="#">LOG OUT</a>
+				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
+				<% if(!username.equalsIgnoreCase("guest")) { %>
+					<a class="menuItem" href="GetUser?userID=<%=userID%>" ><li>My Profile</li></a>
+					<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
+					<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
+					<a id="signOutButton" href="Signout">LOG OUT</a>
+				<% } else { %>
+					<a id="signOutButton" href="login.jsp">LOG IN</a>
+				<% } %>
+				
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 

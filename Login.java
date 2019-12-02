@@ -1,4 +1,4 @@
-
+package cs201Project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +43,9 @@ public class Login extends HttpServlet {
     	if(username.contentEquals("guest")){
     		session.setAttribute("loggedIn", "guest");
     		session.setAttribute("username", "guest");
+    		
+    		RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/homepage.jsp"); 
+    		dispatch.forward(request,response);
     	}else {
     	try {
     		PreparedStatement ps = 

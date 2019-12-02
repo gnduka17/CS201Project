@@ -79,7 +79,10 @@
 <%
 	HttpSession sesh = request.getSession(false);
 	//String logged = (String)sesh.getAttribute("loggedIn");
-	//int userID = (int)sesh.getAttribute("userID");
+	int userID = 0;
+	if(sesh.getAttribute("userID") != null ) {
+		userID = (int)sesh.getAttribute("userID");
+	}
 	int productID = (int)request.getAttribute("productID");
 	String name = (String)request.getAttribute("productName");
 	String description = (String)request.getAttribute("productDescription");
@@ -90,6 +93,9 @@
 	String sellerName = (String)request.getAttribute("sellerName");
 	int buyerID = 2;
 	String logged = "true";
+	
+	
+
 %>
 <body onload="loadButton()">
 	<div id="navbar">

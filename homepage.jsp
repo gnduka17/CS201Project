@@ -3,9 +3,12 @@
     
 <%
 	HttpSession sesh = request.getSession(false);
-	String logged = (String)sesh.getAttribute("loggedIn");
-	//int userID = (int)sesh.getAttribute("userID");
-	int userID = 1;
+	int userID = 0;
+	if(sesh.getAttribute("userID") != null ) {
+		userID = (int)sesh.getAttribute("userID");
+	}
+	String username = (String)sesh.getAttribute("username");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -112,6 +115,19 @@
 			animation-fill-mode: forwards;
 			display: inline;
 		}
+		#signOutButton {
+			color: black;
+			text-decoration: none;
+			height: 40px;
+			width: 120px;
+			border: 3px solid black;
+			font-size: 1.2em;
+			transition: all 0.2s;
+		}
+		#signOutButton:hover {
+			background-color: black;
+			color: white;
+		}
 		@keyframes S{
 			20% {
 				color: white;
@@ -152,10 +168,15 @@
 
 			<ul id="menu">
 				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
-				<a class="menuItem" href="GetUser?userID=<%=userID%>"><li>My Profile</li></a>
-				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
-				<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
-				<a id="signOutButton" href="#">LOG OUT</a>
+				<% if(!username.equalsIgnoreCase("guest")) { %>
+					<a class="menuItem" href="GetUser?userID=<%=userID%>" ><li>My Profile</li></a>
+					<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
+					<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
+					<a id="signOutButton" href="Signout">LOG OUT</a>
+				<% } else { %>
+					<a id="signOutButton" href="login.jsp">LOG IN</a>
+				<% } %>
+				
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 

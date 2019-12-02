@@ -12,9 +12,11 @@
 	<link rel="stylesheet" href="main.css">
 	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
 <%
-//	Delete next two lines once files are integrated
-	session.setAttribute("userID", 2);
-	session.setAttribute("name","Max");
+	HttpSession sesh = request.getSession(false);
+	int userID = 0;
+	if(sesh.getAttribute("userID") != null ) {
+		userID = (int)sesh.getAttribute("userID");
+	}
 
 	List<Transaction> sellerList = Database.getSellingTransactions((Integer)session.getAttribute("userID"));
 	List<Transaction> buyerList = Database.getBuyingTransactions((Integer)session.getAttribute("userID"));
@@ -71,10 +73,16 @@
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="#"><li>Shop Page</li></a>
-				<a class="menuItem" href="#"><li>My Profile</li></a>
-				<a class="menuItem" href="#"><li>Add Item</li></a>
-				<a id="signOutButton" href="#">LOG OUT</a>
+				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
+				<% if(!username.equalsIgnoreCase("guest")) { %>
+					<a class="menuItem" href="GetUser?userID=<%=userID%>" ><li>My Profile</li></a>
+					<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
+					<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
+					<a id="signOutButton" href="Signout">LOG OUT</a>
+				<% } else { %>
+					<a id="signOutButton" href="login.jsp">LOG IN</a>
+				<% } %>
+				
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
