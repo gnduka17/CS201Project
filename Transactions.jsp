@@ -25,41 +25,53 @@
 	function accept(listingID, productID){
 		var xhttp = new XMLHttpRequest();
 		var link = "TransactionServlet?productID="+productID;
-		xhttp.open("POST", link, false);
+		xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		    	if (xhttp.responseText.trim().length > 0) {
+					document.getElementById("sellmsg").innerHTML= xhttp.responseText;
+					alert(xhttp.responseText);
+					document.getElementById(listingID).style.display="none";
+					return false;
+				}
+				return true;
+		    }
+		};
+		xhttp.open("POST", link, true);
 		xhttp.send();
-		if (xhttp.responseText.trim().length > 0) {
-			document.getElementById("sellmsg").innerHTML= xhttp.responseText;
-			alert(xhttp.responseText);
-			document.getElementById(listingID).style.display="none";
-			return false;
-		}
-		return true;
 	}
 	function reject(listingID, userID, productID, buyerID){
 		var xhttp = new XMLHttpRequest();
 		var link = "TransactionServlet?productID="+productID+"&buyerID="+buyerID;
-		xhttp.open("GET", link, false);
+		xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		    	if (xhttp.responseText.trim().length > 0) {
+					document.getElementById("sellmsg").innerHTML= xhttp.responseText;
+					alert(xhttp.responseText);
+					document.getElementById("p"+listingID+"u"+userID).style.display="none";
+					return false;
+				}
+				return true;
+		    }
+		};
+		xhttp.open("GET", link, true);
 		xhttp.send();
-		if (xhttp.responseText.trim().length > 0) {
-			document.getElementById("sellmsg").innerHTML= xhttp.responseText;
-			alert(xhttp.responseText);
-			document.getElementById("p"+listingID+"u"+userID).style.display="none";
-			return false;
-		}
-		return true;
 	}
 	function cancel(listingID, productID, buyerID){
 		var xhttp = new XMLHttpRequest();
 		var link = "TransactionServlet?productID="+productID+"&buyerID="+buyerID;
-		xhttp.open("GET", link, false);
+		xhttp.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		    	if (xhttp.responseText.trim().length > 0) {
+					document.getElementById("buymsg").innerHTML= xhttp.responseText;
+					alert(xhttp.responseText);
+					document.getElementById("b"+listingID).style.display="none";
+					return false;
+				}
+				return true;
+		    }
+		};
+		xhttp.open("GET", link, true);
 		xhttp.send();
-		if (xhttp.responseText.trim().length > 0) {
-			document.getElementById("buymsg").innerHTML= xhttp.responseText;
-			alert(xhttp.responseText);
-			document.getElementById("b"+listingID).style.display="none";
-			return false;
-		}
-		return true;
 	}
 </script>
 </head>
