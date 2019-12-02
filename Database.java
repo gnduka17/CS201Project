@@ -137,7 +137,7 @@ public class Database {
 		PreparedStatement ps = null;
 		
 		String deleteTransaction = "DELETE FROM Transactions WHERE productID = ?";
-//		String deleteProduct = "DELETE FROM Product WHERE productID = ?";
+		String deleteProduct = "DELETE FROM Product WHERE productID = ?";
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://google/silcData?"
@@ -151,12 +151,12 @@ public class Database {
 				return false;
 			}
 			
-//			ps = conn.prepareStatement(deleteProduct);
-//			ps.setInt(1, productID);
-//			
-//			if(ps.executeUpdate()==0) {
-//				return false;
-//			}
+			ps = conn.prepareStatement(deleteProduct);
+			ps.setInt(1, productID);
+			
+			if(ps.executeUpdate()==0) {
+				return false;
+			}
 			
 			return true;
 			
