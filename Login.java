@@ -1,4 +1,3 @@
-package cs201Project;
 
 
 import java.io.IOException;
@@ -36,11 +35,14 @@ public class Login extends HttpServlet {
     
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	initConnection(); 
-    	//System.out.println("hello");
+    	System.out.println("hello");
     	String username = (String) request.getParameter("username"); 
     	String password = (String) request.getParameter("password"); 
     	HttpSession session = request.getSession();
-    	
+    	if(username.contentEquals("guest")){
+    		session.setAttribute("loggedIn", "guest");
+    		session.setAttribute("username", "guest");
+    	}else {
     	try {
     		PreparedStatement ps = 
     			connection1.prepareStatement("SELECT * FROM User WHERE username='" + username + "' AND password='" + password + "'");
@@ -71,6 +73,7 @@ public class Login extends HttpServlet {
     	}catch(SQLException e) {
     		
     		e.printStackTrace();
+    	}
     	}
     }
 
