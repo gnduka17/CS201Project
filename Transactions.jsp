@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="final_project.Database" %>
-<%@ page import="final_project.Transaction" %>
+<%@ page import="cs201Project.Database" %>
+<%@ page import="cs201Project.Transaction" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <!DOCTYPE html>
@@ -13,8 +13,11 @@
 	<link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
 <%
 //	Delete next two lines once files are integrated
-	List<Transaction> sellerList = Database.getSellingTransactions((Integer)session.getAttribute("userID"));
-	List<Transaction> buyerList = Database.getBuyingTransactions((Integer)session.getAttribute("userID"));
+	int userID = (Integer)session.getAttribute("userID");
+	String username = (String)session.getAttribute("username");
+	String name = (String)session.getAttribute("name");
+	List<Transaction> sellerList = Database.getSellingTransactions(userID);
+	List<Transaction> buyerList = Database.getBuyingTransactions(userID);
 %>
 <script>
 	function accept(listingID, productID){
@@ -80,30 +83,27 @@
 			<span></span>
 
 			<ul id="menu">
-				<a class="menuItem" href="#"><li>Shop Page</li></a>
-				<a class="menuItem" href="#"><li>My Profile</li></a>
-				<a class="menuItem" href="#"><li>Add Item</li></a>
-				<a id="signOutButton" href="#">LOG OUT</a>
+				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
+				<% if(!username.equalsIgnoreCase("guest")) { %>
+					<a class="menuItem" href="GetUser?userID=<%=userID%>" ><li>My Profile</li></a>
+					<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
+					<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
+					<a id="signOutButton" href="Signout">LOG OUT</a>
+				<% } else { %>
+					<a id="signOutButton" href="login.jsp">LOG IN</a>
+				<% } %>
+				
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
-		
-
 		<form id="searchForm">
-			<input id="searchBar" type="text" name="searchInput" placeholder="Search for products">
+			<input id="searchBar" type="text" name="search" placeholder="Search for products">
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
-		
-		<a href="notifications.jsp">
-			<div id="notificationIcon">
-				<span class="oi" data-glyph="bell"></span>
-			</div>
-		</a>
-		
 	</div> <!-- #navbar -->
 	
 	<div style="margin: 10%">
-	<h1 style="margin-bottom: 50px"><%=session.getAttribute("name") %>'s transactions</h1>
+	<h1 style="margin-bottom: 50px"><%=name %>'s transactions</h1>
 	<h2>Items I'm Selling</h2>
 	<div id="sellmsg" style="color:red"></div>
 	<table>
@@ -144,7 +144,7 @@
 			<tr>
 				<td><a href="GetUser?userID=<%= entry.getKey()%>"><%= entry.getValue()%></a></td>
 				<td>
-					<form action="javascript:void(0);" onsubmit="cancel(<%= i%>,<%= buyerList.get(i).getProductID()%>,<%= session.getAttribute("userID")%>)">
+					<form action="javascript:void(0);" onsubmit="cancel(<%= i%>,<%= buyerList.get(i).getProductID()%>,<%= userID%>)">
 						<input type="submit" value="Cancel">
 					</form>
 				</td>
