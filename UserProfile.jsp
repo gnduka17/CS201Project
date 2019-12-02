@@ -14,17 +14,18 @@
 		#main-container {
 			width: 800px;
 			margin: 0px auto;
-			padding-top: 100px;
+			padding-top: 60px;
 		}
 		#profile-container {
 			width: 600px;
 			margin: 0px auto;
 		}
 		#profilePicture {
-			width: 200px;
-			height: 200px;
+			width: 196px;
+			height: 196px;
 			background-color: gray;
 			border-radius: 100px;
+			border: 1px solid black;
 			float: left;
 			overflow: hidden;
 		}
@@ -52,7 +53,7 @@
 			font-weight: normal;
 		}
 		#products-container {
-			margin-top: 80px;
+			margin-top: 60px;
 		}
 		#productPicture{
 			width: 130px;
@@ -64,6 +65,18 @@
 			font-size: 2em;
 			font-weight: bold;
 			margin-bottom: 20px;
+		}
+		#remove_button {
+			transition: all 0.2s;
+			padding: 10px 14px;
+			border: 2px solid black;
+			cursor: pointer;
+			border-radius: 100px;
+		}
+		#remove_button:hover {
+			border: 2px solid black;
+			background-color: #EEEEEE;
+			color: black;
 		}
 	</style>
 
@@ -140,33 +153,30 @@
 
 		<div id="products-container">
 			<h2>Products <%=name%> is selling</h2>
-			<hr>
 			<!-- for loop for all products here -->
 			<% 
 			GetUserItems user = new GetUserItems();
 			ArrayList<Product> items = user.getItems(userID);
 			for(int i=0; i<items.size(); i++){
 			%>
-			<table style="border-bottom: 1px solid gray; width:800px;">
+			<table style="border-top: 1px solid black; padding: 20px 0px; width:800px;">
 				<tr>
 					<div id="<%=items.get(i).getProductID()%>">
-						<td>
+						<td style="width:160px;">
 							<div id="productPicture">
 							</div>
 						</td>
-						<td>
-							<a href="GetProductDetails?productID=<%=items.get(i).getProductID()%>">
-								<p id="productName">Product name: <%=items.get(i).getProductName()%> </p>
+						<td style="width:500px;">
+							<a href="GetProductDetails?productID=<%=items.get(i).getProductID()%>" style="text-decoration:none;color:black;">
+								<p id="productName" style="margin:0px 0px 20px 0px;font-size:1.6em;"><%=items.get(i).getProductName()%> </p>
 							</a>
-							<em>
-								<p class="details">Seller: <%=items.get(i).getSellerName()%> </p>
-							</em>
+							<p class="details" style="font-size:1.2em;">Seller: <em><%=items.get(i).getSellerName()%></em></p>
 							<br>
-							<p class="details">Price: <%=items.get(i).getProductPrice()%> </p>
+							<p class="details" style="font-size:1.2em;">Price: $<%=items.get(i).getProductPrice()%> </p>
 						</td>
 						<%  if((logged=="true") && (curr_userID==userID)){ %>
-							<td>
-								<a id="remove_button" onclick="removeRequest(<%=items.get(i).getProductID()%>)" style="border-style:solid; position:relative; top:20px; cursor: pointer;">REMOVE</a>
+							<td style="padding:0px;">
+								<a id="remove_button" onclick="removeRequest(<%=items.get(i).getProductID()%>)" style=""><strong>REMOVE</strong></a>
 							</td>
 						<% }  %>
 					</div> <!-- #profileProducts -->
