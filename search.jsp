@@ -7,7 +7,6 @@
 	HttpSession sesh = request.getSession(false);
 	int userID = (int)sesh.getAttribute("userID");
 	String username = (String)sesh.getAttribute("username");
-	
 %>
     
 <!DOCTYPE html>

@@ -79,6 +79,7 @@
 	if(sesh.getAttribute("userID") != null ) {
 		curr_userID = (int)sesh.getAttribute("userID");
 	}
+	String logged = (String)sesh.getAttribute("loggedIn");
 	String username = (String)sesh.getAttribute("username");
 %>
 
@@ -109,8 +110,8 @@
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
-		<form id="searchForm">
-			<input id="searchBar" type="text" name="search" placeholder="Search for products">
+		<form id="searchForm" action = "SearchServlet">
+			<input id="searchBar" type="text" name="searchInput" placeholder="Search for products">
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
 	</div> <!-- #navbar -->
@@ -163,9 +164,11 @@
 							<br>
 							<p class="details">Price: <%=items.get(i).getProductPrice()%> </p>
 						</td>
-						<td>
-							<a id="remove_button" onclick="removeRequest(<%=items.get(i).getProductID()%>)" style="border-style:solid; position:relative; top:20px; cursor: pointer;">REMOVE</a>
-						</td>
+						<%  if((logged=="true") && (curr_userID==userID)){ %>
+							<td>
+								<a id="remove_button" onclick="removeRequest(<%=items.get(i).getProductID()%>)" style="border-style:solid; position:relative; top:20px; cursor: pointer;">REMOVE</a>
+							</td>
+						<% }  %>
 					</div> <!-- #profileProducts -->
 				</tr>
 			<% 
@@ -184,8 +187,8 @@ function removeRequest(productID){
 			productID: productID
 		},
 		success: function(response){
-			alert("Successfully deleted");
-			document.getElementById(productID).style.display = "none";
+			document.getElementById(""+productID).style.display = "none";
+			location.reload();
 		}
 	})
 }

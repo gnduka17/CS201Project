@@ -96,8 +96,8 @@
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
-		<form id="searchForm">
-			<input id="searchBar" type="text" name="search" placeholder="Search for products">
+		<form id="searchForm" action = "SearchServlet">
+			<input id="searchBar" type="text" name="searchInput" placeholder="Search for products">
 			<button id="submit" type="submit" name="submit"><span class="oi" data-glyph="magnifying-glass"></span></button>
 		</form>
 	</div> <!-- #navbar -->

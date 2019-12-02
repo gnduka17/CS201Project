@@ -83,6 +83,7 @@
 	if(sesh.getAttribute("userID") != null ) {
 		userID = (int)sesh.getAttribute("userID");
 	}
+	String username = (String)sesh.getAttribute("username");
 	int productID = (int)request.getAttribute("productID");
 	String name = (String)request.getAttribute("productName");
 	String description = (String)request.getAttribute("productDescription");
@@ -91,8 +92,7 @@
 	String category = (String)request.getAttribute("productCategory");
 	int sellerID = (int)request.getAttribute("sellerID");
 	String sellerName = (String)request.getAttribute("sellerName");
-	int buyerID = 2;
-
+	int buyerID = userID;
 %>
 <body onload="loadButton()">
 	<div id="navbar">
@@ -105,10 +105,15 @@
 
 			<ul id="menu">
 				<a class="menuItem" href="homepage.jsp"><li>Home</li></a>
-				<a class="menuItem" href="GetUser?userID=1"><li>My Profile</li></a>
-				<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
-				<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
-				<a id="signOutButton" href="#">LOG OUT</a>
+				<% if(!username.equalsIgnoreCase("guest")) { %>
+					<a class="menuItem" href="GetUser?userID=<%=userID%>" ><li>My Profile</li></a>
+					<a class="menuItem" href="addItemPage.jsp"><li>Add Item</li></a>
+					<a class="menuItem" href="Transactions.jsp"><li>Transactions</li></a>
+					<a id="signOutButton" href="Signout">LOG OUT</a>
+				<% } else { %>
+					<a id="signOutButton" href="login.jsp">LOG IN</a>
+				<% } %>
+				
 			</ul> <!-- #menu -->
 		</div> <!-- #menuToggle -->
 
@@ -186,7 +191,6 @@ function addRequest(){
 			productID: productID,
 		},
 		success: function(){
-			alert("Successfully added");
 			document.getElementById("buy_button").style.display = "none";
 		}
 	})

@@ -1,6 +1,7 @@
 package cs201Project;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -63,11 +64,13 @@ public class DeleteItem extends HttpServlet {
 			ps.setInt(1, productID);
 			ps.executeUpdate();
 			close_conn(conn, ps, rs);
+			PrintWriter out = response.getWriter();
+			out.println("successful");
+			out.flush();
+			out.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher req = getServletContext().getRequestDispatcher("/UserProfile.jsp");
-		req.forward(request, response);
 	}
 }

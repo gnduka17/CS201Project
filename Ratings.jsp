@@ -60,7 +60,7 @@
 		<h1 style="margin-bottom: 50px">How would you rate <%=request.getParameter("buyerName") %>?</h1>
 		<div class="slidecontainer">
 			<form action="homepage.jsp" onsubmit="rate()">
-  				<input type="range" min="1" max="5" step="1" value="5" class="slider" id="myRange" name="myRange" onchange="change()" style="width:20em">
+  				<input type="range" min="1" max="5" step="1" value="5" class="slider" id="myRange" name="myRange" onchange="change()" style="width:40em">
   				<label for="myRange" id="ratingdisplay">5</label>
   				<input type="submit" value="Submit">
   			</form>

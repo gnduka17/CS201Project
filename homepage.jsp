@@ -2,13 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%
-	HttpSession sesh = request.getSession(false);
+	HttpSession sesh = request.getSession();
 	int userID = 0;
 	if(sesh.getAttribute("userID") != null ) {
 		userID = (int)sesh.getAttribute("userID");
 	}
 	String username = (String)sesh.getAttribute("username");
-
 %>
 <!DOCTYPE html>
 <html>
