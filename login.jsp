@@ -97,6 +97,20 @@
 		
 		return true;
 	}
+function validate2(){
+		
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "Login?username=guest&password=guest" , false);
+		xhttp.send();
+		if (xhttp.responseText.trim().length > 0) {
+			
+			document.getElementById("youGoofed").innerHTML = xhttp.responseText;
+			return false; 
+		}
+		
+		
+		return true;
+	}
 	
 	</script>
 </head>
@@ -116,6 +130,7 @@
 		</form>
 		<br>
 		<p>Don't have an account yet? <a href="register.jsp">REGISTER</a></p>
+		<p>Or log in as a guest? <a href="javascript:validate2()"> GUEST</a> </p>
 
 	</div> <!-- #login-container -->
 </body>

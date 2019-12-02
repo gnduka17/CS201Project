@@ -1,4 +1,3 @@
-package cs201Project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,8 +37,13 @@ public class Signout extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	initConnection(); 
     	
+    	HttpSession session = request.getSession();
     	
+    	request.setAttribute("username", null);
+    	request.setAttribute("loggedIn", "false");
     	
+    	RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/Login.jsp"); 
+    	dispatch.forward(request,response);
     }
     
 	/**
